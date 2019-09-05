@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6C8394624F535B1A8952A7DA /* libPods-Parkiminder Beta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EACD05E52BDD4454BDE727DB /* libPods-Parkiminder Beta.a */; };
+		D73FC51623179CEF0019D813 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FC51523179CEF0019D813 /* PreviewViewController.swift */; };
+		D73FC5182317D5FB0019D813 /* CustomTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FC5172317D5FB0019D813 /* CustomTimerViewController.swift */; };
+		D76FE6502314CC6B00F8CB18 /* CountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76FE64F2314CC6B00F8CB18 /* CountdownViewController.swift */; };
+		D76FE6522314D8B400F8CB18 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76FE6512314D8B400F8CB18 /* Reminder.swift */; };
+		D7AEC2AD2314C7750056AEFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AEC2AC2314C7750056AEFD /* AppDelegate.swift */; };
+		D7AEC2AF2314C7750056AEFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AEC2AE2314C7750056AEFD /* ViewController.swift */; };
+		D7AEC2B22314C7750056AEFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7AEC2B02314C7750056AEFD /* Main.storyboard */; };
+		D7AEC2B52314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D7AEC2B32314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld */; };
+		D7AEC2B72314C7770056AEFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7AEC2B62314C7770056AEFD /* Assets.xcassets */; };
+		D7AEC2BA2314C7770056AEFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7AEC2B82314C7770056AEFD /* LaunchScreen.storyboard */; };
+		D7D5CCD82316720100E68F5B /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D5CCD72316720100E68F5B /* LocalNotificationsManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		50C913F08CD0E1EF629C70BB /* Pods-Parkiminder Beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkiminder Beta.release.xcconfig"; path = "Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta.release.xcconfig"; sourceTree = "<group>"; };
+		77AA945FDB83CF8CAC23B207 /* Pods-Parkiminder Beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkiminder Beta.debug.xcconfig"; path = "Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta.debug.xcconfig"; sourceTree = "<group>"; };
+		D73FC51523179CEF0019D813 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		D73FC5172317D5FB0019D813 /* CustomTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimerViewController.swift; sourceTree = "<group>"; };
+		D76FE64F2314CC6B00F8CB18 /* CountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewController.swift; sourceTree = "<group>"; };
+		D76FE6512314D8B400F8CB18 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		D7AEC2A92314C7750056AEFD /* Parkiminder Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parkiminder Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7AEC2AC2314C7750056AEFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D7AEC2AE2314C7750056AEFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D7AEC2B12314C7750056AEFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D7AEC2B42314C7750056AEFD /* Parkiminder_Beta.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Parkiminder_Beta.xcdatamodel; sourceTree = "<group>"; };
+		D7AEC2B62314C7770056AEFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D7AEC2B92314C7770056AEFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D7AEC2BB2314C7770056AEFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7D5CCD72316720100E68F5B /* LocalNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsManager.swift; sourceTree = "<group>"; };
+		EACD05E52BDD4454BDE727DB /* libPods-Parkiminder Beta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Parkiminder Beta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D7AEC2A62314C7750056AEFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C8394624F535B1A8952A7DA /* libPods-Parkiminder Beta.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		963B17E43E094B39F83A920B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EACD05E52BDD4454BDE727DB /* libPods-Parkiminder Beta.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D3DD532426AA61DD2FF38FF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				77AA945FDB83CF8CAC23B207 /* Pods-Parkiminder Beta.debug.xcconfig */,
+				50C913F08CD0E1EF629C70BB /* Pods-Parkiminder Beta.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D7AEC2A02314C7750056AEFD = {
+			isa = PBXGroup;
+			children = (
+				D7AEC2AB2314C7750056AEFD /* Parkiminder Beta */,
+				D7AEC2AA2314C7750056AEFD /* Products */,
+				9D3DD532426AA61DD2FF38FF /* Pods */,
+				963B17E43E094B39F83A920B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D7AEC2AA2314C7750056AEFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D7AEC2A92314C7750056AEFD /* Parkiminder Beta.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D7AEC2AB2314C7750056AEFD /* Parkiminder Beta */ = {
+			isa = PBXGroup;
+			children = (
+				D7AEC2AC2314C7750056AEFD /* AppDelegate.swift */,
+				D7AEC2AE2314C7750056AEFD /* ViewController.swift */,
+				D76FE64F2314CC6B00F8CB18 /* CountdownViewController.swift */,
+				D7AEC2B02314C7750056AEFD /* Main.storyboard */,
+				D73FC5172317D5FB0019D813 /* CustomTimerViewController.swift */,
+				D73FC51523179CEF0019D813 /* PreviewViewController.swift */,
+				D76FE6512314D8B400F8CB18 /* Reminder.swift */,
+				D7AEC2B62314C7770056AEFD /* Assets.xcassets */,
+				D7AEC2B82314C7770056AEFD /* LaunchScreen.storyboard */,
+				D7AEC2BB2314C7770056AEFD /* Info.plist */,
+				D7AEC2B32314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld */,
+				D7D5CCD72316720100E68F5B /* LocalNotificationsManager.swift */,
+			);
+			path = "Parkiminder Beta";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D7AEC2A82314C7750056AEFD /* Parkiminder Beta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7AEC2BE2314C7770056AEFD /* Build configuration list for PBXNativeTarget "Parkiminder Beta" */;
+			buildPhases = (
+				2305420E761619ADD824C302 /* [CP] Check Pods Manifest.lock */,
+				D7AEC2A52314C7750056AEFD /* Sources */,
+				D7AEC2A62314C7750056AEFD /* Frameworks */,
+				D7AEC2A72314C7750056AEFD /* Resources */,
+				CD5A66CBB11895F78A1A54FB /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Parkiminder Beta";
+			productName = "Parkiminder Beta";
+			productReference = D7AEC2A92314C7750056AEFD /* Parkiminder Beta.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D7AEC2A12314C7750056AEFD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = COMP90019;
+				TargetAttributes = {
+					D7AEC2A82314C7750056AEFD = {
+						CreatedOnToolsVersion = 10.3;
+					};
+				};
+			};
+			buildConfigurationList = D7AEC2A42314C7750056AEFD /* Build configuration list for PBXProject "Parkiminder Beta" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D7AEC2A02314C7750056AEFD;
+			productRefGroup = D7AEC2AA2314C7750056AEFD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D7AEC2A82314C7750056AEFD /* Parkiminder Beta */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D7AEC2A72314C7750056AEFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7AEC2BA2314C7770056AEFD /* LaunchScreen.storyboard in Resources */,
+				D7AEC2B72314C7770056AEFD /* Assets.xcassets in Resources */,
+				D7AEC2B22314C7750056AEFD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2305420E761619ADD824C302 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Parkiminder Beta-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD5A66CBB11895F78A1A54FB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D7AEC2A52314C7750056AEFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D76FE6502314CC6B00F8CB18 /* CountdownViewController.swift in Sources */,
+				D7AEC2AF2314C7750056AEFD /* ViewController.swift in Sources */,
+				D73FC51623179CEF0019D813 /* PreviewViewController.swift in Sources */,
+				D7AEC2B52314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld in Sources */,
+				D7AEC2AD2314C7750056AEFD /* AppDelegate.swift in Sources */,
+				D73FC5182317D5FB0019D813 /* CustomTimerViewController.swift in Sources */,
+				D7D5CCD82316720100E68F5B /* LocalNotificationsManager.swift in Sources */,
+				D76FE6522314D8B400F8CB18 /* Reminder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D7AEC2B02314C7750056AEFD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7AEC2B12314C7750056AEFD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D7AEC2B82314C7770056AEFD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7AEC2B92314C7770056AEFD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D7AEC2BC2314C7770056AEFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D7AEC2BD2314C7770056AEFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D7AEC2BF2314C7770056AEFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77AA945FDB83CF8CAC23B207 /* Pods-Parkiminder Beta.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9N7Z3A7RDJ;
+				INFOPLIST_FILE = "Parkiminder Beta/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "comp.90019.Parkiminder-Beta";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D7AEC2C02314C7770056AEFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50C913F08CD0E1EF629C70BB /* Pods-Parkiminder Beta.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9N7Z3A7RDJ;
+				INFOPLIST_FILE = "Parkiminder Beta/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "comp.90019.Parkiminder-Beta";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D7AEC2A42314C7750056AEFD /* Build configuration list for PBXProject "Parkiminder Beta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7AEC2BC2314C7770056AEFD /* Debug */,
+				D7AEC2BD2314C7770056AEFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7AEC2BE2314C7770056AEFD /* Build configuration list for PBXNativeTarget "Parkiminder Beta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7AEC2BF2314C7770056AEFD /* Debug */,
+				D7AEC2C02314C7770056AEFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D7AEC2B32314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D7AEC2B42314C7750056AEFD /* Parkiminder_Beta.xcdatamodel */,
+			);
+			currentVersion = D7AEC2B42314C7750056AEFD /* Parkiminder_Beta.xcdatamodel */;
+			path = Parkiminder_Beta.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D7AEC2A12314C7750056AEFD /* Project object */;
+}
