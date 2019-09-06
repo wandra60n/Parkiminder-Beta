@@ -20,12 +20,16 @@ class CountdownViewController: UIViewController {
     @IBOutlet weak var ibTimeLabel: UILabel!
     @IBOutlet weak var ibImagePreview: UIImageView!
     @IBOutlet weak var ibDescriptionLabel: UILabel!
+    @IBOutlet weak var ibDoneButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 //        refreshView()
+        self.ibDoneButton.layer.cornerRadius = 10
+        self.ibDoneButton.clipsToBounds = true
+        
         initAppObserver()
         if countdownTask?.isDue() == false && self.timer == nil {
             durationLeft = Int(countdownTask!.dueTime.timeIntervalSinceNow * 1000)
@@ -89,6 +93,7 @@ class CountdownViewController: UIViewController {
 //        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         self.timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
+    
     @objc func updateTimer() {
         if durationLeft! >= 0 {
             if durationLeft! % 1000 == 0 {

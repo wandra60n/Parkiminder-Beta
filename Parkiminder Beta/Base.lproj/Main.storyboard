@@ -116,6 +116,8 @@
                         <outlet property="ibDebugLabel" destination="Gzk-r0-ZZs" id="Ov1-GZ-waD"/>
                         <outlet property="ibDescriptionText" destination="AHe-EF-3NN" id="HAt-3f-cDG"/>
                         <outlet property="ibHotAButton" destination="KB2-QA-LKB" id="FDe-xn-BNT"/>
+                        <outlet property="ibHotBButton" destination="lTe-1O-y71" id="d9X-wN-xqT"/>
+                        <outlet property="ibHotCButton" destination="XHx-c7-45I" id="SPd-64-VWR"/>
                         <outlet property="ibMapView" destination="VwG-Mz-6j9" id="GdQ-hw-bxv"/>
                         <segue destination="wff-YY-Rkr" kind="show" identifier="segueToCountdown" id="SKg-e4-yB9"/>
                         <segue destination="64C-VX-Pgj" kind="show" identifier="segueToPreview" id="Yyp-Uw-lKn"/>
@@ -296,18 +298,20 @@
                                     <action selector="clickDirectionButton:" destination="wff-YY-Rkr" eventType="touchUpInside" id="hUu-fI-pze"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jg3-9J-1hM">
-                                <rect key="frame" x="177" y="561" width="57" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yoe-9B-U6g">
+                                <rect key="frame" x="16" y="561" width="61" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="I'm Here"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yoe-9B-U6g">
-                                <rect key="frame" x="38" y="561" width="55" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Dismiss"/>
+                                <state key="normal" title="Dismiss" image="cross"/>
                                 <connections>
                                     <action selector="clickDismissButton:" destination="wff-YY-Rkr" eventType="touchUpInside" id="87x-mO-5bs"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jg3-9J-1hM">
+                                <rect key="frame" x="105" y="561" width="251" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.89558105677573385" green="1" blue="0.5067664290875884" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
+                                <state key="normal" title="I'm Here"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -315,6 +319,7 @@
                     </view>
                     <connections>
                         <outlet property="ibDescriptionLabel" destination="fPn-bm-nFQ" id="aNh-kQ-rKX"/>
+                        <outlet property="ibDoneButton" destination="jg3-9J-1hM" id="8h9-wg-bNY"/>
                         <outlet property="ibImagePreview" destination="e8v-Id-YIh" id="oiz-ms-9vv"/>
                         <outlet property="ibTimeLabel" destination="Tjx-QC-ITC" id="Zxx-AG-93g"/>
                     </connections>

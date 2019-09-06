@@ -28,6 +28,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var ibCameraButton: UIButton!
     
     @IBOutlet weak var ibHotAButton: UIButton!
+    @IBOutlet weak var ibHotBButton: UIButton!
+    @IBOutlet weak var ibHotCButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,10 @@ class ViewController: UIViewController {
     func makeButtonRound() {
         self.ibHotAButton.layer.cornerRadius = 10
         self.ibHotAButton.clipsToBounds = true
+        self.ibHotBButton.layer.cornerRadius = 10
+        self.ibHotBButton.clipsToBounds = true
+        self.ibHotCButton.layer.cornerRadius = 10
+        self.ibHotCButton.clipsToBounds = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -235,7 +241,7 @@ class ViewController: UIViewController {
         segueToCountdown()
     }
     
-    func test_last5secs() {
+    /**func test_last5secs() {
         // dummy 15 secs reminder
         tempReminder = Reminder()
         // create reminder 5 seconds before duetime
@@ -249,7 +255,7 @@ class ViewController: UIViewController {
         
 //        UserDefaults.standard.set(true, forKey: "COUNTDOWN_IS_RUNNING")
         // countdown.localNotificationsManager = localNotificationsManager
-    }
+    }**/
     
 }
 
