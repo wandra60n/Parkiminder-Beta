@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
-class Reminder : Codable{
+class Reminder : Codable {
     
     let createdTime: Date
     let dueTime: Date
@@ -69,6 +71,53 @@ class Reminder : Codable{
             return true
         } else {
             return false
+        }
+    }
+    
+    func persistToCD() {
+        guard let imageURL = persistImage() as? String else {
+            return
+        }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Reminder_CD", in: managedContext)!
+        
+        let reminder = NSManagedObject(entity: entity, insertInto: managedContext)
+        reminder.setValue(self.createdTime, forKeyPath: "createdTime_Date")
+        reminder.setValue(self.description, forKeyPath: "description_String")
+        reminder.setValue(self.dueTime, forKeyPath: "dueTime_Date")
+        reminder.setValue(imageURL, forKeyPath: "imageurl_String")
+        reminder.setValue(self.latitude, forKeyPath: "latitude_Double")
+        reminder.setValue(self.longitude, forKeyPath: "longitude_Double")
+        
+        do {
+            try managedContext.save()
+            print("save to core data successfull")
+        } catch {
+            print("fail to save to core data")
+        }
+        
+    }
+    
+    func persistImage() -> String? {
+        
+        if self.imageData == nil {
+            return "IMAGE_NOT_AVAILABLE"
+        }
+        
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let imageFilename = String(self.createdTime.timeIntervalSince1970).replacingOccurrences(of: ".", with: "-") + ".JPEG"
+        let imageURL = documentsPath.appendingPathComponent(imageFilename)
+        
+        do {
+            try self.imageData?.write(to: imageURL)
+//            print(String(imageFilename))
+            return String(imageFilename)
+        } catch {
+            print("can not save file \(imageURL)")
+            return nil
         }
     }
 }

@@ -239,6 +239,7 @@ class ViewController: UIViewController {
         
         tempReminder!.saveCurrent()
         segueToCountdown()
+        
     }
     
     /**func test_last5secs() {
@@ -256,8 +257,13 @@ class ViewController: UIViewController {
 //        UserDefaults.standard.set(true, forKey: "COUNTDOWN_IS_RUNNING")
         // countdown.localNotificationsManager = localNotificationsManager
     }**/
+    @IBAction func clickHistoryButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "segueToHistory", sender: self)
+    }
     
 }
+
+
 
 extension ViewController: GMSMapViewDelegate {
     

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6C8394624F535B1A8952A7DA /* libPods-Parkiminder Beta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EACD05E52BDD4454BDE727DB /* libPods-Parkiminder Beta.a */; };
+		D7207091232A04CD0065A710 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7207090232A04CD0065A710 /* HistoryViewController.swift */; };
+		D7207095232A549E0065A710 /* HistoryReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7207094232A549E0065A710 /* HistoryReminderCell.swift */; };
 		D73FC51623179CEF0019D813 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FC51523179CEF0019D813 /* PreviewViewController.swift */; };
 		D73FC5182317D5FB0019D813 /* CustomTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FC5172317D5FB0019D813 /* CustomTimerViewController.swift */; };
 		D76FE6502314CC6B00F8CB18 /* CountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76FE64F2314CC6B00F8CB18 /* CountdownViewController.swift */; };
@@ -19,11 +21,15 @@
 		D7AEC2B72314C7770056AEFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7AEC2B62314C7770056AEFD /* Assets.xcassets */; };
 		D7AEC2BA2314C7770056AEFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7AEC2B82314C7770056AEFD /* LaunchScreen.storyboard */; };
 		D7D5CCD82316720100E68F5B /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D5CCD72316720100E68F5B /* LocalNotificationsManager.swift */; };
+		D7D9F1952331D9B3002F9481 /* FoldingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D9F1942331D9B3002F9481 /* FoldingHeader.swift */; };
+		D7D9F1972331DA35002F9481 /* FoldingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D9F1962331DA35002F9481 /* FoldingHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		50C913F08CD0E1EF629C70BB /* Pods-Parkiminder Beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkiminder Beta.release.xcconfig"; path = "Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta.release.xcconfig"; sourceTree = "<group>"; };
 		77AA945FDB83CF8CAC23B207 /* Pods-Parkiminder Beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkiminder Beta.debug.xcconfig"; path = "Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta.debug.xcconfig"; sourceTree = "<group>"; };
+		D7207090232A04CD0065A710 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		D7207094232A549E0065A710 /* HistoryReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryReminderCell.swift; sourceTree = "<group>"; };
 		D73FC51523179CEF0019D813 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		D73FC5172317D5FB0019D813 /* CustomTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimerViewController.swift; sourceTree = "<group>"; };
 		D76FE64F2314CC6B00F8CB18 /* CountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +43,8 @@
 		D7AEC2B92314C7770056AEFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7AEC2BB2314C7770056AEFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7D5CCD72316720100E68F5B /* LocalNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsManager.swift; sourceTree = "<group>"; };
+		D7D9F1942331D9B3002F9481 /* FoldingHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingHeader.swift; sourceTree = "<group>"; };
+		D7D9F1962331DA35002F9481 /* FoldingHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoldingHeaderView.xib; sourceTree = "<group>"; };
 		EACD05E52BDD4454BDE727DB /* libPods-Parkiminder Beta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Parkiminder Beta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -94,14 +102,18 @@
 				D7AEC2AE2314C7750056AEFD /* ViewController.swift */,
 				D76FE64F2314CC6B00F8CB18 /* CountdownViewController.swift */,
 				D7AEC2B02314C7750056AEFD /* Main.storyboard */,
+				D7207090232A04CD0065A710 /* HistoryViewController.swift */,
+				D7207094232A549E0065A710 /* HistoryReminderCell.swift */,
+				D7D9F1942331D9B3002F9481 /* FoldingHeader.swift */,
+				D7D9F1962331DA35002F9481 /* FoldingHeaderView.xib */,
 				D73FC5172317D5FB0019D813 /* CustomTimerViewController.swift */,
 				D73FC51523179CEF0019D813 /* PreviewViewController.swift */,
+				D7D5CCD72316720100E68F5B /* LocalNotificationsManager.swift */,
 				D76FE6512314D8B400F8CB18 /* Reminder.swift */,
 				D7AEC2B62314C7770056AEFD /* Assets.xcassets */,
 				D7AEC2B82314C7770056AEFD /* LaunchScreen.storyboard */,
 				D7AEC2BB2314C7770056AEFD /* Info.plist */,
 				D7AEC2B32314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld */,
-				D7D5CCD72316720100E68F5B /* LocalNotificationsManager.swift */,
 			);
 			path = "Parkiminder Beta";
 			sourceTree = "<group>";
@@ -166,6 +178,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7D9F1972331DA35002F9481 /* FoldingHeaderView.xib in Resources */,
 				D7AEC2BA2314C7770056AEFD /* LaunchScreen.storyboard in Resources */,
 				D7AEC2B72314C7770056AEFD /* Assets.xcassets in Resources */,
 				D7AEC2B22314C7750056AEFD /* Main.storyboard in Resources */,
@@ -221,12 +234,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7207095232A549E0065A710 /* HistoryReminderCell.swift in Sources */,
 				D76FE6502314CC6B00F8CB18 /* CountdownViewController.swift in Sources */,
 				D7AEC2AF2314C7750056AEFD /* ViewController.swift in Sources */,
 				D73FC51623179CEF0019D813 /* PreviewViewController.swift in Sources */,
 				D7AEC2B52314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld in Sources */,
 				D7AEC2AD2314C7750056AEFD /* AppDelegate.swift in Sources */,
 				D73FC5182317D5FB0019D813 /* CustomTimerViewController.swift in Sources */,
+				D7207091232A04CD0065A710 /* HistoryViewController.swift in Sources */,
+				D7D9F1952331D9B3002F9481 /* FoldingHeader.swift in Sources */,
 				D7D5CCD82316720100E68F5B /* LocalNotificationsManager.swift in Sources */,
 				D76FE6522314D8B400F8CB18 /* Reminder.swift in Sources */,
 			);

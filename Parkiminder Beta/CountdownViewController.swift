@@ -36,6 +36,8 @@ class CountdownViewController: UIViewController {
 //            durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
             loadElements()
             runTimer()
+        } else {
+            print("i am doing nothing now")
         }
         /**
         durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
@@ -151,7 +153,13 @@ class CountdownViewController: UIViewController {
 //        }
     }
         
-//        mapURL.append(String(self.countdownTask?.latitude))
+    @IBAction func clickDoneButton(_ sender: UIButton) {
+        // persist the reminder, dont forget for nil image
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        countdownTask.persistToCD()
+        backToMain()
+    }
+    //        mapURL.append(String(self.countdownTask?.latitude))
     
     /*
     // MARK: - Navigation
