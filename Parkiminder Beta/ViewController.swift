@@ -49,7 +49,8 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.hideKeyboardWhenTappedAround()
         
-        
+        // uncomment this to create dummy reminders with nil image
+//        initiateDummyReminders(x: 3, y: 4, z: 5)
     }
     
     func makeButtonRound() {
@@ -242,6 +243,66 @@ class ViewController: UIViewController {
         
     }
     
+    func initiateDummyReminders(x: Int, y: Int, z: Int) {
+        // today is 19 Sept 2019
+        //random area melb (long lat) 144.959963,-37.82016,144.980037,-37.799924
+        
+        let minLat = -37.82016; let maxLat = -37.799924
+        let minLong = 144.959963; let maxLong = 144.980037
+        
+        var dateArray: [Date] = []
+        var c = x // 5 records for this month
+        let tday = Date()
+        while c > 0 {
+            dateArray.append(tday.randomDatetimeFrom(prevMos: 0))
+            c -= 1
+        }
+        
+        c = y
+        while c > 0 {
+            dateArray.append((Calendar.current.date(byAdding: .month, value: -1, to: tday)?.randomDatetimeFrom(prevMos: 2))!)
+            c -= 1
+        }
+        
+        c = z
+        while c > 0 {
+            dateArray.append((Calendar.current.date(byAdding: .month, value: -3, to: tday)?.randomDatetimeFrom(prevMos: 5))!)
+            c -= 1
+        }
+//        print(dateArray.count)
+//        print(dateArray)
+        for date in dateArray {
+            let tempLat = Double.random(in: minLat...maxLat)
+            let tempLong = Double.random(in: minLong...maxLong)
+            
+            let geoCoder = GMSGeocoder()
+            // Asks the geocoder to reverse geocode the coordinate passed to the method.
+            geoCoder.reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: tempLat, longitude: tempLong)) { response, error in guard let address = response?.firstResult(), let lines = address.lines else {
+                return
+                }
+//                let description =
+                let tempReminder = Reminder(
+                    createdTime: date,
+                    dueTime: date.addingTimeInterval(Double.random(in: 600...172800)),
+                    latitude: tempLat,
+                    longitude: tempLong, imageData: nil,
+                    description: lines.joined(separator: "\n"))
+                tempReminder.persistToCD()
+            }
+            
+//            let tempReminder = Reminder(
+//                createdTime: date,
+//                dueTime: date.addingTimeInterval(Double.random(in: 600...172800)),
+//                latitude: tempLat,
+//                longitude: tempLong, imageData: nil, description: reverseGeoCode(longitude: tempLong, latitude: tempLat))
+//            tempReminder.persistToCD()
+////            print("done")
+        }
+    }
+    
+    
+    
+    
     /**func test_last5secs() {
         // dummy 15 secs reminder
         tempReminder = Reminder()
@@ -275,6 +336,8 @@ extension ViewController: GMSMapViewDelegate {
         print("lat: \(coordinate.latitude) ; long: \(coordinate.longitude)")
         self.tempLatitude = coordinate.latitude
         self.tempLongitude = coordinate.longitude
+        
+        
         
         // object to turn a latitude and longitude coordinate into a street address.
         let geoCoder = GMSGeocoder()
@@ -313,7 +376,7 @@ extension ViewController: CLLocationManagerDelegate {
         
         // only get initial location, then stop
         locationManager.stopUpdatingLocation()
-//        print("initial location lat: \(location.coordinate.latitude) ; long: \(location.coordinate.longitude)")
+        print("initial location lat: \(location.coordinate.latitude) ; long: \(location.coordinate.longitude)")
         self.tempLatitude = location.coordinate.latitude
         self.tempLongitude = location.coordinate.longitude
         

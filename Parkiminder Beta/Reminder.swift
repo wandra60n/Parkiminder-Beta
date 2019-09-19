@@ -28,14 +28,15 @@ class Reminder : Codable {
         self.description = description
     }
     
-    init() { // dummy implementation only
+    /**
+     init() { // dummy implementation only
         self.createdTime = Date()
         self.dueTime = createdTime + 15
         self.latitude = -37.808163434
         self.longitude = 144.957829502
         self.imageData = nil
         self.description = "this is Melbourne"
-    }
+    }**/
     
     func saveCurrent() -> Bool{
         do {
