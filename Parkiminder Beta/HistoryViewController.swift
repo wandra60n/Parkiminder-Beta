@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import GoogleMaps
 
-struct DateGroup {
+/**struct DateGroup {
     var title: String
     var records: [NSManagedObject]
     var collapsed: Bool
@@ -20,7 +20,7 @@ struct DateGroup {
         self.records = records
         self.collapsed = collapsed
     }
-}
+}**/
 
 class HistoryViewController: UIViewController {
     
@@ -32,7 +32,7 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var ibDismissButton: UIButton!
     
     var reminders_CD: [NSManagedObject] = []
-    var ds: [DateGroup] = []
+    var ds: [RecordsGroup] = []
     
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
@@ -49,9 +49,9 @@ class HistoryViewController: UIViewController {
 //        ibDebugLabel.text = (lastReminder.value(forKey: "imageurl_String") as! String)
         
         // create dummy group
-        ds.append(DateGroup(title: "This Month"))
-        ds.append(DateGroup(title: "Last 3 Months"))
-        ds.append(DateGroup(title: "More"))
+        ds.append(RecordsGroup(title: "This Month", collapsed: false))
+        ds.append(RecordsGroup(title: "Last 3 Months", collapsed: true))
+        ds.append(RecordsGroup(title: "More", collapsed: true))
         
         while reminders_CD.count > 0 {
             let tempRecord = reminders_CD.popLast()
@@ -175,12 +175,14 @@ extension HistoryViewController: UITableViewDataSource {
         return UITableView.automaticDimension
     }
     
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         //let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? HeaderExpandable ?? HeaderExpandable(reuseIdentifier: "header")
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FoldingHeaderView") as! FoldingHeader
         headerView.ibSectionLabel.text = ds[section].title
         headerView.rotateIcon(ds[section].collapsed)
+        if ds[section].records.count == 0 {
+            headerView.ibTrashButton.isEnabled = false
+        }
         headerView.section = section
         headerView.delegate = self
         /**
@@ -226,13 +228,48 @@ extension HistoryViewController: UITableViewDataSource {
 
 extension HistoryViewController: UITableViewDelegate {
     
+   /**func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.ibDismissButton.alpha = 0
+        }, completion: { (value: Bool) in
+            self.ibDismissButton.isHidden = true
+        })
+        
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        self.ibDismissButton.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.ibDismissButton.alpha = 1
+        }, completion: { (value: Bool) in
+            self.ibDismissButton.isHidden = false
+        })
+    }**/
 }
 
 extension HistoryViewController: FoldingHeaderDelegate {
+    func clearRecordsInSection(header: FoldingHeader) {
+        print("trash  \(header.section) clicked")
+        let alert = UIAlertController(title: "Clear records for \(self.ds[header.section].title)?", message: "This will delete all records in this group.", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            
+            if self.ds[header.section].clearRecords() {
+                self.ibHistoryTable.reloadSections(NSIndexSet(index: header.section) as IndexSet, with: .automatic)
+                print("records for \(self.ds[header.section].title) have been cleared.")
+            }
+            
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
+    }
+    
     func toggleSection(_ header: FoldingHeader, section: Int) {
+        // negate the status
         let collapsed = !ds[section].collapsed
-        
+        // set the status
         ds[section].collapsed = collapsed
+        // animation stuff
         header.rotateIcon(collapsed)
      
         ibHistoryTable.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)

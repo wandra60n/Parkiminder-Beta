@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FoldingHeader" customModule="Parkiminder_Beta" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="qJ5-pA-Znd" customClass="FoldingHeader" customModule="Parkiminder_Beta" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -18,27 +16,39 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWt-Vo-kf8">
                     <rect key="frame" x="10" y="0.0" width="355" height="45"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfX-Jh-bxo">
-                            <rect key="frame" x="129.5" y="0.0" width="96" height="45"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left" translatesAutoresizingMaskIntoConstraints="NO" id="a8U-k9-KGr">
+                            <rect key="frame" x="325" y="0.0" width="22" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="22" id="2Up-9C-TrH"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VN2-pC-Lb8">
+                            <rect key="frame" x="8" y="7" width="31" height="31"/>
+                            <state key="normal" image="bin"/>
+                            <connections>
+                                <action selector="clickTrashButton:" destination="-1" eventType="touchUpInside" id="ZEi-gR-n0d"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfX-Jh-bxo">
+                            <rect key="frame" x="102" y="0.0" width="151" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left" translatesAutoresizingMaskIntoConstraints="NO" id="a8U-k9-KGr">
-                            <rect key="frame" x="325" y="0.0" width="22" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="22" id="vjP-WJ-LRC"/>
-                            </constraints>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="a8U-k9-KGr" firstAttribute="trailing" secondItem="yWt-Vo-kf8" secondAttribute="trailingMargin" id="1T0-sE-uN7"/>
-                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="centerX" secondItem="yWt-Vo-kf8" secondAttribute="centerX" id="9T2-N7-aem"/>
-                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="bottom" secondItem="a8U-k9-KGr" secondAttribute="bottom" id="LWM-Lp-eNh"/>
-                        <constraint firstItem="a8U-k9-KGr" firstAttribute="height" secondItem="yWt-Vo-kf8" secondAttribute="height" id="X3y-k0-nax"/>
-                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="centerY" secondItem="yWt-Vo-kf8" secondAttribute="centerY" id="neX-6Z-twR"/>
-                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="top" secondItem="a8U-k9-KGr" secondAttribute="top" id="oxR-j1-Ai0"/>
+                        <constraint firstItem="a8U-k9-KGr" firstAttribute="trailing" secondItem="yWt-Vo-kf8" secondAttribute="trailingMargin" id="BmK-a7-Gqv"/>
+                        <constraint firstItem="VN2-pC-Lb8" firstAttribute="centerY" secondItem="BfX-Jh-bxo" secondAttribute="centerY" id="DC5-1B-icD"/>
+                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="bottom" secondItem="a8U-k9-KGr" secondAttribute="bottom" id="FOb-3l-PLn"/>
+                        <constraint firstAttribute="bottom" secondItem="BfX-Jh-bxo" secondAttribute="bottom" id="U6B-dd-Lav"/>
+                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="leading" secondItem="VN2-pC-Lb8" secondAttribute="trailing" constant="63" id="YIc-YI-eep"/>
+                        <constraint firstItem="VN2-pC-Lb8" firstAttribute="top" secondItem="yWt-Vo-kf8" secondAttribute="top" constant="7" id="ZEv-RI-UXB"/>
+                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="centerX" secondItem="yWt-Vo-kf8" secondAttribute="centerX" id="ciP-jP-55B"/>
+                        <constraint firstItem="a8U-k9-KGr" firstAttribute="leading" secondItem="BfX-Jh-bxo" secondAttribute="trailing" constant="72" id="mny-CX-kuV"/>
+                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="top" secondItem="yWt-Vo-kf8" secondAttribute="top" id="qOb-gT-Qg6"/>
+                        <constraint firstItem="BfX-Jh-bxo" firstAttribute="top" secondItem="a8U-k9-KGr" secondAttribute="top" id="vaZ-xl-Hb2"/>
+                        <constraint firstItem="VN2-pC-Lb8" firstAttribute="leading" secondItem="yWt-Vo-kf8" secondAttribute="leadingMargin" id="voi-A8-RTj"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
@@ -47,21 +57,23 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="yWt-Vo-kf8" secondAttribute="trailing" constant="10" id="0iG-7R-qHL"/>
-                <constraint firstItem="yWt-Vo-kf8" firstAttribute="top" secondItem="qJ5-pA-Znd" secondAttribute="top" id="6DH-b6-QHM"/>
-                <constraint firstItem="yWt-Vo-kf8" firstAttribute="leading" secondItem="qJ5-pA-Znd" secondAttribute="leading" constant="10" id="9iV-UJ-NCt"/>
-                <constraint firstAttribute="bottom" secondItem="yWt-Vo-kf8" secondAttribute="bottom" constant="5" id="YaM-DC-Z1D"/>
+                <constraint firstItem="yWt-Vo-kf8" firstAttribute="top" secondItem="qJ5-pA-Znd" secondAttribute="top" id="478-Op-GYD"/>
+                <constraint firstItem="yWt-Vo-kf8" firstAttribute="centerX" secondItem="qJ5-pA-Znd" secondAttribute="centerX" id="Tc3-Sk-ekp"/>
+                <constraint firstAttribute="bottom" secondItem="yWt-Vo-kf8" secondAttribute="bottom" constant="5" id="XaK-Rg-VeV"/>
+                <constraint firstItem="yWt-Vo-kf8" firstAttribute="leading" secondItem="qJ5-pA-Znd" secondAttribute="leading" constant="10" id="ztn-e0-V1C"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="ibBackgroundView" destination="yWt-Vo-kf8" id="QEC-Uh-Za0"/>
                 <outlet property="ibFoldIcon" destination="a8U-k9-KGr" id="4IO-Cl-UKu"/>
                 <outlet property="ibSectionLabel" destination="BfX-Jh-bxo" id="SDW-uu-Sth"/>
+                <outlet property="ibTrashButton" destination="VN2-pC-Lb8" id="h6D-0P-VjV"/>
             </connections>
             <point key="canvasLocation" x="186" y="-6"/>
         </view>
     </objects>
     <resources>
+        <image name="bin" width="60" height="60"/>
         <image name="left" width="60" height="60"/>
     </resources>
 </document>

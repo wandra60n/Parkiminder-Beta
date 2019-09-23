@@ -16,6 +16,7 @@ class FoldingHeader: UITableViewHeaderFooterView {
     @IBOutlet weak var ibSectionLabel: UILabel!
     @IBOutlet weak var ibFoldIcon: UIImageView!
     @IBOutlet weak var ibBackgroundView: UIView!
+    @IBOutlet weak var ibTrashButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,11 +43,15 @@ class FoldingHeader: UITableViewHeaderFooterView {
         ibFoldIcon.rotate(collapsed ? 0.0 : -.pi / 2)
     }
     
+    @IBAction func clickTrashButton(_ sender: UIButton) {
+        delegate?.clearRecordsInSection(header: self)
+    }
 }
 
 
 protocol FoldingHeaderDelegate {
     func toggleSection(_ header: FoldingHeader, section: Int)
+    func clearRecordsInSection(header: FoldingHeader)
 }
 
 
