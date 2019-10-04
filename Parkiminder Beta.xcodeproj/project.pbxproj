@@ -12,6 +12,7 @@
 		D7207095232A549E0065A710 /* HistoryReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7207094232A549E0065A710 /* HistoryReminderCell.swift */; };
 		D73FC51623179CEF0019D813 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FC51523179CEF0019D813 /* PreviewViewController.swift */; };
 		D73FC5182317D5FB0019D813 /* CustomTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FC5172317D5FB0019D813 /* CustomTimerViewController.swift */; };
+		D741DEB92346719400FE1C51 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D741DEB82346719300FE1C51 /* ButtonCollectionViewCell.swift */; };
 		D76FE6502314CC6B00F8CB18 /* CountdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76FE64F2314CC6B00F8CB18 /* CountdownViewController.swift */; };
 		D76FE6522314D8B400F8CB18 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76FE6512314D8B400F8CB18 /* Reminder.swift */; };
 		D773B92A233890790037D524 /* RecordsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D773B929233890790037D524 /* RecordsGroup.swift */; };
@@ -34,6 +35,7 @@
 		D7207094232A549E0065A710 /* HistoryReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryReminderCell.swift; sourceTree = "<group>"; };
 		D73FC51523179CEF0019D813 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		D73FC5172317D5FB0019D813 /* CustomTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimerViewController.swift; sourceTree = "<group>"; };
+		D741DEB82346719300FE1C51 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		D76FE64F2314CC6B00F8CB18 /* CountdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownViewController.swift; sourceTree = "<group>"; };
 		D76FE6512314D8B400F8CB18 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		D773B929233890790037D524 /* RecordsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsGroup.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				D7AEC2B02314C7750056AEFD /* Main.storyboard */,
 				D7207090232A04CD0065A710 /* HistoryViewController.swift */,
 				D7CAB0292333202700729440 /* NoRecordController.swift */,
+				D741DEB82346719300FE1C51 /* ButtonCollectionViewCell.swift */,
 				D7207094232A549E0065A710 /* HistoryReminderCell.swift */,
 				D7D9F1942331D9B3002F9481 /* FoldingHeader.swift */,
 				D773B929233890790037D524 /* RecordsGroup.swift */,
@@ -252,6 +255,7 @@
 				D773B92A233890790037D524 /* RecordsGroup.swift in Sources */,
 				D7D5CCD82316720100E68F5B /* LocalNotificationsManager.swift in Sources */,
 				D76FE6522314D8B400F8CB18 /* Reminder.swift in Sources */,
+				D741DEB92346719400FE1C51 /* ButtonCollectionViewCell.swift in Sources */,
 				D7CAB02A2333202700729440 /* NoRecordController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,7 +413,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "comp.90019.Parkiminder-Beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -428,7 +432,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "comp.90019.Parkiminder-Beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

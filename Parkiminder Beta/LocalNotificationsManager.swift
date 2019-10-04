@@ -50,14 +50,14 @@ class LocalNotificationsManager {
         }
     }
     
-    func scheduleNotifications() {
+    func scheduleNotifications() -> Bool {
         for notification in notifications {
             let content = UNMutableNotificationContent()
             content.title = notification.title
             content.sound = .default
+            content.body = notification.descrption
             
             let trigger = UNCalendarNotificationTrigger(dateMatching: notification.datetime, repeats: false)
-            
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request) { (error) in
@@ -67,11 +67,13 @@ class LocalNotificationsManager {
             }
         }
         print("\(#function) success")
+        return true
     }
 }
 
 struct Notification {
-    var id:String
-    var title:String
-    var datetime:DateComponents
+    var id: String
+    var title: String
+    var descrption: String
+    var datetime: DateComponents
 }

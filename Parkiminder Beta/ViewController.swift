@@ -20,22 +20,26 @@ class ViewController: UIViewController {
     var isCameraAvailable: Bool?
     
     private let locationManager = CLLocationManager()
-    
+    private let default_image = UIImage(named: "icon_camera")
+    private let hotButtons: [Double] = [30*60, 60*60, 90*60, 120*60]
     @IBOutlet weak var ibMapView: GMSMapView!
     @IBOutlet weak var ibDescriptionText: UITextView!
     
-    @IBOutlet weak var ibDebugLabel: UILabel!
+    
     @IBOutlet weak var ibCameraButton: UIButton!
     
     @IBOutlet weak var ibHotAButton: UIButton!
     @IBOutlet weak var ibHotBButton: UIButton!
     @IBOutlet weak var ibHotCButton: UIButton!
+    @IBOutlet weak var ibHistoryButton: UIButton!
+    @IBOutlet weak var ibCustomTimerButton: UIButton!
+    @IBOutlet weak var ibButtonCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // CLLocationManagerDelegate
-        makeButtonRound()
+        applyStyling()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         // GMSMapViewDelegate
@@ -51,16 +55,30 @@ class ViewController: UIViewController {
         
         // uncomment this to create dummy reminders with nil image
 //        initiateDummyReminders(x: 3, y: 4, z: 5)
+        ibButtonCollectionView.dataSource = self
+        ibButtonCollectionView.delegate = self
     }
     
-    func makeButtonRound() {
+    func applyStyling() {
+        ibHistoryButton.makeSquircle()
+//        ibHotAButton.makeSquircle()
+//        ibHotBButton.makeSquircle()
+//        ibHotCButton.makeSquircle()
+        ibCustomTimerButton.makeSquircle()
+        ibCameraButton.makeSquircle()
+        ibDescriptionText.makeSquircle()
+        ibMapView.makeSquircle()
+        ibButtonCollectionView.makeSquircle()
+    }
+    
+    /**func makeButtonRound() {
         self.ibHotAButton.layer.cornerRadius = 10
         self.ibHotAButton.clipsToBounds = true
         self.ibHotBButton.layer.cornerRadius = 10
         self.ibHotBButton.clipsToBounds = true
         self.ibHotCButton.layer.cornerRadius = 10
         self.ibHotCButton.clipsToBounds = true
-    }
+    }**/
     
     override func viewDidAppear(_ animated: Bool) {
         checkCameraPresent()
@@ -128,7 +146,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func clickCameraButton(_ sender: UIButton) {
-        let default_image = UIImage(named: "camera")
+//        let default_image = UIImage(named: "icon_camera")
         let capturedImageIsEmpty = ibCameraButton.currentImage == default_image
         if capturedImageIsEmpty {
             takePicture()
@@ -191,7 +209,7 @@ class ViewController: UIViewController {
     
     func clearCapturedImage() {
         self.tempImage = nil
-        ibCameraButton.setImage(UIImage(named: "camera"), for: .normal)
+        ibCameraButton.setImage((default_image), for: .normal)
     }
     
     
@@ -219,7 +237,9 @@ class ViewController: UIViewController {
     func createReminder(secondsInterval: Double) {
         print("\(#function) \(secondsInterval)")
         
-        let default_image = UIImage(named: "camera")
+        // schedule reminder first!
+        
+        
         let capturedImageIsEmpty = ibCameraButton.currentImage == default_image
         let dateNow = Date()
         
@@ -229,19 +249,45 @@ class ViewController: UIViewController {
             tempReminder = Reminder(createdTime: dateNow, dueTime: dateNow + secondsInterval, latitude: self.tempLatitude!, longitude: self.tempLongitude!, imageData: (self.tempImage?.jpegData(compressionQuality: 1.0))!, description: self.ibDescriptionText.text)
         }
         
+        scheduleNotifications()
         
-        var localNotificationsManager = LocalNotificationsManager()
+        /**var localNotificationsManager = LocalNotificationsManager()
         let tempDate = tempReminder!.dueTime - 5
         let calendar = Calendar.current
         let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: tempDate)
         
         localNotificationsManager.notifications = [Notification(id: "LAST_5_SEC_NOTIFICATION", title: "Parking End in 5 Sec", datetime: components)]
-        localNotificationsManager.schedule()
+        localNotificationsManager.schedule()**/
         
         tempReminder!.saveCurrent()
         segueToCountdown()
         
     }
+    
+    func scheduleNotifications() {
+        var durationTuples:[(id: String, duration: Double)] = []
+        durationTuples.append((id: "PARKING_ENDED", duration: 0*60))
+        durationTuples.append((id: "LAST_5_MINS", duration: 5*60))
+        durationTuples.append((id: "LAST_15_MINS", duration: 15*60))
+        durationTuples.append((id: "LAST_30_MINS", duration: 30*60))
+        
+        var localNotificationsManager = LocalNotificationsManager()
+        for tuple in durationTuples {
+            let notificationDate = tempReminder!.dueTime - tuple.duration
+            if  notificationDate > tempReminder!.createdTime {
+                let components = Calendar.current.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: notificationDate)
+                var notificationTitle = "Parking end in "
+                if tuple.duration > 0 {
+                    notificationTitle += tuple.duration.toString()
+                } else {
+                    notificationTitle = "Parking has ended"
+                }
+                localNotificationsManager.notifications.append(Notification(id: tuple.id, title: notificationTitle, descrption: tempReminder!.description, datetime: components))
+            }
+        }
+        localNotificationsManager.schedule()
+    }
+    
     
     func initiateDummyReminders(x: Int, y: Int, z: Int) {
         // today is 19 Sept 2019
@@ -409,10 +455,72 @@ extension UIViewController {
     // tap anywhere to hide keyboard
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return hotButtons.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HotButton", for: indexPath) as! ButtonCollectionViewCell
+        
+        cell.ibValueLabel.text = String(format:"%.0f", hotButtons[indexPath.item]/60)
+        cell.makeSquircle()
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item)
+        createReminder(secondsInterval: hotButtons[indexPath.item])
+    }
+}
+
+extension UIView {
+    func makeCircle() {
+        self.layer.cornerRadius = self.frame.width / 2
+    }
+//    func putShadow() {
+//        self.layer.shadowColor = UIColor.black.cgColor
+//        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+//        self.layer.masksToBounds = false
+//        self.layer.shadowRadius = 1.0
+//        self.layer.shadowOpacity = 0.5
+//    }
+    func makeSquircle() {
+        self.layer.cornerRadius = 10
+        self.clipsToBounds = true
+    }
+}
+
+extension Double {
+    func toString() -> String {
+        let formatter = DateComponentsFormatter()
+
+        if Int(self*1000/86400000) > 0 {
+//            print("day style")
+            formatter.allowedUnits = [.day, .hour, .minute]
+            formatter.unitsStyle = .abbreviated
+        } else if Int(self*1000/3600000) > 0 {
+//            print("hour style")
+            formatter.allowedUnits = [.hour, .minute]
+            formatter.unitsStyle = .full
+        } else if Int(self*1000/60000) > 0 {
+//            print("minute style")
+            formatter.allowedUnits = [.minute, .second]
+            formatter.unitsStyle = .brief
+        } else {
+//            print("second style")
+            formatter.allowedUnits = [.second]
+            formatter.unitsStyle = .brief
+        }
+
+        return formatter.string(from: self)!
     }
 }

@@ -31,6 +31,7 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var ibPreviewBUtton: UIButton!
     @IBOutlet weak var ibDismissButton: UIButton!
     
+    @IBOutlet weak var consHistoryTableHeight: NSLayoutConstraint!
     var reminders_CD: [NSManagedObject] = []
     var ds: [RecordsGroup] = []
     
@@ -65,19 +66,9 @@ class HistoryViewController: UIViewController {
             }
         }
         
-        /**ds[0].records.append(reminders_CD[0])
-        ds[0].records.append(reminders_CD[1])
-        
-        ds[1].records.append(reminders_CD[2])
-        ds[1].records.append(reminders_CD[3])
-        
-        for i in 4...self.reminders_CD.count-1 {
-            ds[2].records.append(reminders_CD[i])
-        }**/
-        
-        
         self.ibHistoryTable.dataSource = self
         self.ibHistoryTable.delegate = self
+//        self.ibMapView.delegate = self
         
         let headerNib = UINib.init(nibName: "FoldingHeaderView", bundle: Bundle.main)
         ibHistoryTable.register(headerNib, forHeaderFooterViewReuseIdentifier: "FoldingHeaderView")
@@ -86,6 +77,11 @@ class HistoryViewController: UIViewController {
         
         self.ibHistoryTable.rowHeight = UITableView.automaticDimension
 //        self.ibHistoryTable.estimatedRowHeight = 80.0 // set to whatever your "average" cell height is
+        
+        /**let firstIndex = IndexPath(row: 0, section: 0)
+        moveMarker(indexPath: firstIndex)
+        self.ibHistoryTable.selectRow(at: firstIndex, animated: false, scrollPosition: .none)**/
+        
         ibDismissButton.layer.cornerRadius = 0.5 * ibDismissButton.bounds.size.width
         ibDismissButton.clipsToBounds = true
         
@@ -93,7 +89,6 @@ class HistoryViewController: UIViewController {
         ibPreviewBUtton.clipsToBounds = true
         ibMapView.bringSubviewToFront(ibPreviewBUtton)
         
-//        self.ibMapView.delegate = self
     }
     
     
@@ -210,8 +205,11 @@ extension HistoryViewController: UITableViewDataSource {
 //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        moveMarker(indexPath: indexPath)
+    }
+    
+    func moveMarker(indexPath: IndexPath) {
         self.ibMapView.clear()
-        
 //        let selected = self.reminders_CD[indexPath.row]
         let selected = self.ds[indexPath.section].records[indexPath.row]
         let coordinate = CLLocationCoordinate2D(latitude: selected.value(forKey: "latitude_Double") as! Double, longitude: selected.value(forKey: "longitude_Double") as! Double)

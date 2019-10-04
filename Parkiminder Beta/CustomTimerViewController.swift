@@ -10,9 +10,12 @@ import UIKit
 
 class CustomTimerViewController: UIViewController {
 
-    @IBOutlet weak var ibModeLabel: UILabel!
+//    @IBOutlet weak var ibModeLabel: UILabel!
     @IBOutlet weak var ibDatePicker: UIDatePicker!
-    @IBOutlet weak var ibModeSwitch: UISwitch!
+//    @IBOutlet weak var ibModeSwitch: UISwitch!
+    @IBOutlet weak var ibPickerSwitch: UISegmentedControl!
+    @IBOutlet weak var ibViewContainer: UIView!
+    @IBOutlet weak var ibCreateButton: UIButton!
     
     var callback_createReminder: ((Double) -> Void)?
     
@@ -21,36 +24,49 @@ class CustomTimerViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.dismissViewWhenTappedAround()
+        ibViewContainer.makeSquircle()
+        ibCreateButton.makeSquircle()
         initModeTimer()
     }
     
     @IBAction func clickCreateButton(_ sender: UIButton) {
         dismiss(animated: true) {
 //            self.callback_createReminder!(temp!)
-            if self.ibModeSwitch.isOn { // countdown mode
+            if self.ibPickerSwitch.selectedSegmentIndex == 0 {
+                self.callback_createReminder!(self.ibDatePicker.countDownDuration)
+            } else {
+                self.callback_createReminder!(self.ibDatePicker.date.timeIntervalSinceNow)
+            }
+            /**if self.ibModeSwitch.isOn { // countdown mode
                 self.callback_createReminder!(self.ibDatePicker.countDownDuration)
             } else {
                 print("(\(#function)) \(self.ibDatePicker.date)")
                 self.callback_createReminder!(self.ibDatePicker.date.timeIntervalSinceNow)
-            }
+            }**/
         }
 //        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func clickDismissButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func clickPickerSwitch(_ sender: UISegmentedControl) {
+        switch ibPickerSwitch.selectedSegmentIndex {
+        case 0:
+            initModeTimer()
+        case 1:
+            initModeDate()
+        default:
+            break
+        }
     }
-    
-    @IBAction func clickModeSwitch(_ sender: UISwitch) {
+    /**@IBAction func clickModeSwitch(_ sender: UISwitch) {
         if ibModeSwitch.isOn {
             initModeTimer()
         } else {
             initModeDate()
         }
-    }
+    }**/
     
     func initModeTimer() {
-        ibModeLabel.text = "Timer"
+//        ibModeLabel.text = "Timer"
         ibDatePicker.datePickerMode = .countDownTimer
 //        ibDatePicker.timeZone = .autoupdatingCurrent
         ibDatePicker.countDownDuration = 30*60
@@ -59,8 +75,9 @@ class CustomTimerViewController: UIViewController {
     }
     
     func initModeDate() {
-        ibModeLabel.text = "Pick Time"
+//        ibModeLabel.text = "Pick Time"
         ibDatePicker.datePickerMode = .dateAndTime
+        ibDatePicker.minuteInterval = 10
 //        ibDatePicker.calendar = .current
 //        ibDatePicker.timeZone = .autoupdatingCurrent
 //        ibDatePicker.minuteInterval = 10
