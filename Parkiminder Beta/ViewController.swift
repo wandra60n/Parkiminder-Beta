@@ -12,25 +12,18 @@ import GoogleMaps
 class ViewController: UIViewController {
 
     var tempReminder: Reminder?
-    
     var tempLatitude: Double?
     var tempLongitude: Double?
     var tempImage: UIImage?
-    
     var isCameraAvailable: Bool?
     
     private let locationManager = CLLocationManager()
     private let default_image = UIImage(named: "icon_camera")
     private let hotButtons: [Double] = [30*60, 60*60, 90*60, 120*60]
+    
     @IBOutlet weak var ibMapView: GMSMapView!
     @IBOutlet weak var ibDescriptionText: UITextView!
-    
-    
     @IBOutlet weak var ibCameraButton: UIButton!
-    
-    @IBOutlet weak var ibHotAButton: UIButton!
-    @IBOutlet weak var ibHotBButton: UIButton!
-    @IBOutlet weak var ibHotCButton: UIButton!
     @IBOutlet weak var ibHistoryButton: UIButton!
     @IBOutlet weak var ibCustomTimerButton: UIButton!
     @IBOutlet weak var ibButtonCollectionView: UICollectionView!
@@ -214,27 +207,6 @@ class ViewController: UIViewController {
         ibCameraButton.setImage((default_image), for: .normal)
     }
     
-    
-    @IBAction func clickHotAButton(_ sender: UIButton) {
-        // 30 mins by default
-        createReminder(secondsInterval: 30 * 60.0)
-//        tempReminder!.saveCurrent()
-//        segueToCountdown()
-    }
-    
-    @IBAction func clickHotBButton(_ sender: UIButton) {
-        // 60 mins by default
-        createReminder(secondsInterval: 60 * 60.0)
-//        tempReminder!.saveCurrent()
-//        segueToCountdown()
-    }
-    
-    @IBAction func clickHotCButton(_ sender: UIButton) {
-        // 120 mins by default
-        createReminder(secondsInterval: 120 * 60.0)
-//        tempReminder!.saveCurrent()
-//        segueToCountdown()
-    }
     
     func createReminder(secondsInterval: Double) {
         print("\(#function) \(secondsInterval)")
@@ -507,12 +479,12 @@ extension Double {
 
         if Int(self*1000/86400000) > 0 {
 //            print("day style")
-            formatter.allowedUnits = [.day, .hour, .minute]
-            formatter.unitsStyle = .abbreviated
+            formatter.allowedUnits = [.day, .hour]
+            formatter.unitsStyle = .brief
         } else if Int(self*1000/3600000) > 0 {
 //            print("hour style")
             formatter.allowedUnits = [.hour, .minute]
-            formatter.unitsStyle = .full
+            formatter.unitsStyle = .brief
         } else if Int(self*1000/60000) > 0 {
 //            print("minute style")
             formatter.allowedUnits = [.minute, .second]

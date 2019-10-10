@@ -19,12 +19,12 @@ class CountdownViewController: UIViewController {
     
     @IBOutlet weak var ibTimeLabel: UILabel!
     @IBOutlet weak var ibImagePreview: UIImageView!
-    @IBOutlet weak var ibDescriptionLabel: UILabel!
     @IBOutlet weak var ibDoneButton: UIButton!
     @IBOutlet weak var ibNavigateButton: UIButton!
     @IBOutlet weak var ibCapturedView: UIImageView!
     @IBOutlet weak var ibCapturedViewHeight: NSLayoutConstraint!
     @IBOutlet weak var ibCapturedViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var ibDescriptionViewText: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +35,14 @@ class CountdownViewController: UIViewController {
         self.ibDoneButton.clipsToBounds = true
         self.ibNavigateButton.makeCircle()
         self.ibImagePreview.makeSquircle()
-        
+        self.ibDescriptionViewText.makeSquircle()
         initAppObserver()
         
         
         if countdownTask?.isDue() == false && self.timer == nil {
-            durationLeft = Int(countdownTask!.dueTime.timeIntervalSinceNow * 1000)
-//            durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
+//            durationLeft = Int(countdownTask!.dueTime.timeIntervalSinceNow * 1000)
+            durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
+            
             loadElements()
             runTimer()
         } else {
@@ -62,12 +63,7 @@ class CountdownViewController: UIViewController {
     
     @objc func previewTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-//        let tappedImage = tapGestureRecognizer.view as! UIImageView
-//        print(tappedImage.frame.size)
-        
         performSegue(withIdentifier: "segueToPreview", sender: self)
-
-        // Your action
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -106,31 +102,8 @@ class CountdownViewController: UIViewController {
         if self.countdownTask?.imageData == nil {
             // make sure image preview is hidden
             self.ibCapturedView.isHidden = true
-            /**
-            self.ibImagePreview.contentMode = .scaleAspectFit
-            self.ibImagePreview.backgroundColor = .gray
-            let center = String(self.countdownTask.latitude) + "," + String(self.countdownTask.longitude)
-            var urlComponents = URLComponents()
-            urlComponents.scheme = "https"
-            urlComponents.host = "maps.googleapis.com"
-            urlComponents.path = "/maps/api/staticmap"
-            urlComponents.queryItems = [
-               URLQueryItem(name: "zoom", value: String(19)),
-               URLQueryItem(name: "center", value: center),
-               URLQueryItem(name: "size", value: String(Int(ibImagePreview.frame.size.width)) + "x" + String(Int(ibImagePreview.frame.size.height))),
-               URLQueryItem(name: "markers", value: "location:" + center),
-               URLQueryItem(name: "key", value: "AIzaSyD9ALgOo2K3162mroiad8r6xE9wr-Hhh8s")
-            ]
-            
-            self.ibImagePreview.load(url: urlComponents.url!)
-            self.ibImagePreview.contentMode = .scaleToFill**/
-//            self.ibImagePreview.image = UIImage()
-//            let mapUrl: NSURL = NSURL(string: staticMapUrl)!
-//            self.imgViewMap.sd_setImage(with: mapUrl as URL, placeholderImage: UIImage(named: "palceholder"))
         } else {
-//            self.ibImagePreview.contentMode = .scaleAspectFill
-//            self.ibImagePreview.image = UIImage(data: (self.countdownTask?.imageData)!)
-            
+            // load image to preview
             let capturedImage = UIImage(data: (self.countdownTask?.imageData)!)
             self.ibCapturedViewWidth.constant = (capturedImage?.size.width)! * 0.02
             self.ibCapturedViewHeight.constant = (capturedImage?.size.height)! * 0.02
@@ -138,13 +111,14 @@ class CountdownViewController: UIViewController {
             self.ibCapturedView.contentMode = .scaleAspectFill
             self.ibCapturedView.image = capturedImage
             
+            // add tap gesture
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(previewTapped(tapGestureRecognizer:)))
             self.ibCapturedView.isUserInteractionEnabled = true
             self.ibCapturedView.addGestureRecognizer(tapGestureRecognizer)
-//            self.ibImagePreview.image = capturedImage
         }
         // load text
-        self.ibDescriptionLabel.text = self.countdownTask?.description
+        self.ibDescriptionViewText.text = self.countdownTask?.description
+//        self.ibDescriptionLabel.text = self.countdownTask?.description
     }
     
     @objc func applicationDidEnterBackground(notification : NSNotification) {
@@ -159,27 +133,29 @@ class CountdownViewController: UIViewController {
         print("\(#function)")
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
-        durationLeft = Int(countdownTask!.dueTime.timeIntervalSinceNow * 1000)
-        //            durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
+//        durationLeft = Int(countdownTask!.dueTime.timeIntervalSinceNow * 1000)
+        durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
         if self.timer?.isValid == false {
             loadElements()
             runTimer()
         }
         // reset the timer display here
-        self.ibTimeLabel.text = "00 : 00 : 00"
-        
+//        self.ibTimeLabel.text = "00 : 00 : 00"
+        self.ibTimeLabel.text = "Parking has ended"
     }
     
     func runTimer() {
-//        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        self.timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+//        self.timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer() {
         if durationLeft! >= 0 {
-            if durationLeft! % 1000 == 0 {
+            /**if durationLeft! % 1000 == 0 {
                 ibTimeLabel.text = secsFormatter(time: durationLeft!)
-            }
+            }**/
+//            ibTimeLabel.text = secsFormatter(time: durationLeft!)
+            ibTimeLabel.text = Double(durationLeft!).toString()
             durationLeft! -= 1
         } else {
 //            backToMain()
