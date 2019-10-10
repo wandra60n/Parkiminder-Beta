@@ -95,7 +95,7 @@ class CountdownViewController: UIViewController {
            URLQueryItem(name: "center", value: center),
            URLQueryItem(name: "size", value: String(Int(ibImagePreview.frame.size.width)) + "x" + String(Int(ibImagePreview.frame.size.height))),
            URLQueryItem(name: "markers", value: "location:" + center),
-           URLQueryItem(name: "key", value: "AIzaSyD9ALgOo2K3162mroiad8r6xE9wr-Hhh8s")
+           URLQueryItem(name: "key", value: GMaps_API_Key)
         ]
         
         self.ibImagePreview.load(url: urlComponents.url!)
