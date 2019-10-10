@@ -21,6 +21,10 @@ class CountdownViewController: UIViewController {
     @IBOutlet weak var ibImagePreview: UIImageView!
     @IBOutlet weak var ibDescriptionLabel: UILabel!
     @IBOutlet weak var ibDoneButton: UIButton!
+    @IBOutlet weak var ibNavigateButton: UIButton!
+    @IBOutlet weak var ibCapturedView: UIImageView!
+    @IBOutlet weak var ibCapturedViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var ibCapturedViewWidth: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +33,12 @@ class CountdownViewController: UIViewController {
 //        refreshView()
         self.ibDoneButton.layer.cornerRadius = 10
         self.ibDoneButton.clipsToBounds = true
+        self.ibNavigateButton.makeCircle()
+        self.ibImagePreview.makeSquircle()
         
         initAppObserver()
+        
+        
         if countdownTask?.isDue() == false && self.timer == nil {
             durationLeft = Int(countdownTask!.dueTime.timeIntervalSinceNow * 1000)
 //            durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
@@ -52,17 +60,88 @@ class CountdownViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
+    @objc func previewTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+//        let tappedImage = tapGestureRecognizer.view as! UIImageView
+//        print(tappedImage.frame.size)
+        
+        performSegue(withIdentifier: "segueToPreview", sender: self)
+
+        // Your action
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToPreview" { // for moving to review
+            let preview = segue.destination as! PreviewViewController
+            preview.capturedImage = UIImage(data: (self.countdownTask?.imageData)!)
+            /**preview.callback_clearCapturedImage = { [weak self] in
+                self?.clearCapturedImage()
+            }**/
+            preview.callback_clearCapturedImage = nil
+        }
+    }
+    
     func loadElements() {
+        // load map image
+        self.ibImagePreview.contentMode = .scaleAspectFit
+        self.ibImagePreview.backgroundColor = .gray
+        let center = String(self.countdownTask.latitude) + "," + String(self.countdownTask.longitude)
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "maps.googleapis.com"
+        urlComponents.path = "/maps/api/staticmap"
+        urlComponents.queryItems = [
+           URLQueryItem(name: "zoom", value: String(19)),
+           URLQueryItem(name: "center", value: center),
+           URLQueryItem(name: "size", value: String(Int(ibImagePreview.frame.size.width)) + "x" + String(Int(ibImagePreview.frame.size.height))),
+           URLQueryItem(name: "markers", value: "location:" + center),
+           URLQueryItem(name: "key", value: "AIzaSyD9ALgOo2K3162mroiad8r6xE9wr-Hhh8s")
+        ]
+        
+        self.ibImagePreview.load(url: urlComponents.url!)
+        self.ibImagePreview.contentMode = .scaleToFill
+        
         // load image preview
         
         if self.countdownTask?.imageData == nil {
-            // put default image here
+            // make sure image preview is hidden
+            self.ibCapturedView.isHidden = true
+            /**
             self.ibImagePreview.contentMode = .scaleAspectFit
             self.ibImagePreview.backgroundColor = .gray
-            self.ibImagePreview.image = UIImage(named: "parked_car")
+            let center = String(self.countdownTask.latitude) + "," + String(self.countdownTask.longitude)
+            var urlComponents = URLComponents()
+            urlComponents.scheme = "https"
+            urlComponents.host = "maps.googleapis.com"
+            urlComponents.path = "/maps/api/staticmap"
+            urlComponents.queryItems = [
+               URLQueryItem(name: "zoom", value: String(19)),
+               URLQueryItem(name: "center", value: center),
+               URLQueryItem(name: "size", value: String(Int(ibImagePreview.frame.size.width)) + "x" + String(Int(ibImagePreview.frame.size.height))),
+               URLQueryItem(name: "markers", value: "location:" + center),
+               URLQueryItem(name: "key", value: "AIzaSyD9ALgOo2K3162mroiad8r6xE9wr-Hhh8s")
+            ]
+            
+            self.ibImagePreview.load(url: urlComponents.url!)
+            self.ibImagePreview.contentMode = .scaleToFill**/
+//            self.ibImagePreview.image = UIImage()
+//            let mapUrl: NSURL = NSURL(string: staticMapUrl)!
+//            self.imgViewMap.sd_setImage(with: mapUrl as URL, placeholderImage: UIImage(named: "palceholder"))
         } else {
-            self.ibImagePreview.contentMode = .scaleAspectFill
-            self.ibImagePreview.image = UIImage(data: (self.countdownTask?.imageData)!)
+//            self.ibImagePreview.contentMode = .scaleAspectFill
+//            self.ibImagePreview.image = UIImage(data: (self.countdownTask?.imageData)!)
+            
+            let capturedImage = UIImage(data: (self.countdownTask?.imageData)!)
+            self.ibCapturedViewWidth.constant = (capturedImage?.size.width)! * 0.02
+            self.ibCapturedViewHeight.constant = (capturedImage?.size.height)! * 0.02
+            self.ibCapturedView.isHidden = false
+            self.ibCapturedView.contentMode = .scaleAspectFill
+            self.ibCapturedView.image = capturedImage
+            
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(previewTapped(tapGestureRecognizer:)))
+            self.ibCapturedView.isUserInteractionEnabled = true
+            self.ibCapturedView.addGestureRecognizer(tapGestureRecognizer)
+//            self.ibImagePreview.image = capturedImage
         }
         // load text
         self.ibDescriptionLabel.text = self.countdownTask?.description
@@ -171,4 +250,33 @@ class CountdownViewController: UIViewController {
     }
     */
 
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            do {
+                let data = try Data(contentsOf: url)
+                guard let image = UIImage(data: data) else {
+                    print("invalid image data retrieved")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.image = image
+                    print("static map loaded")
+                }
+            } catch {
+                print("url error")
+                return
+            }
+            /**if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                        print("static map loaded")
+                    }
+                }
+            }**/
+        }
+    }
 }
