@@ -21,9 +21,10 @@ class RecordsGroup {
         self.collapsed = collapsed
     }
     
+    
     func clearRecords() -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            print("mayday mayday")
+//            print("mayday mayday")
             return false
         }
         let managedContext = appDelegate.persistentContainer.viewContext

@@ -27,11 +27,14 @@ class HistoryViewController: UIViewController {
 //    @IBOutlet weak var ibDebugLabel: UILabel!
     @IBOutlet weak var ibMapView: GMSMapView!
     @IBOutlet weak var ibHistoryTable: UITableView!
+    @IBOutlet weak var ibImagePreview: UIImageView!
+    @IBOutlet weak var ibImagePreviewWidth: NSLayoutConstraint!
+    @IBOutlet weak var ibImagePreviewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var ibPreviewBUtton: UIButton!
+//    @IBOutlet weak var ibPreviewBUtton: UIButton!
     @IBOutlet weak var ibDismissButton: UIButton!
     
-    @IBOutlet weak var consHistoryTableHeight: NSLayoutConstraint!
+//    @IBOutlet weak var consHistoryTableHeight: NSLayoutConstraint!
     var reminders_CD: [NSManagedObject] = []
     var ds: [RecordsGroup] = []
     
@@ -45,6 +48,9 @@ class HistoryViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         fetchReminders()
+        
+        
+        
         // just for test
 //        let lastReminder = reminders_CD[0]
 //        ibDebugLabel.text = (lastReminder.value(forKey: "imageurl_String") as! String)
@@ -81,25 +87,28 @@ class HistoryViewController: UIViewController {
         /**let firstIndex = IndexPath(row: 0, section: 0)
         moveMarker(indexPath: firstIndex)
         self.ibHistoryTable.selectRow(at: firstIndex, animated: false, scrollPosition: .none)**/
+        ibDismissButton.makeCircle()
+//        ibDismissButton.layer.cornerRadius = 0.5 * ibDismissButton.bounds.size.width
+//        ibDismissButton.clipsToBounds = true
         
-        ibDismissButton.layer.cornerRadius = 0.5 * ibDismissButton.bounds.size.width
-        ibDismissButton.clipsToBounds = true
-        
-        ibPreviewBUtton.layer.cornerRadius = 0.5 * ibPreviewBUtton.bounds.size.width
-        ibPreviewBUtton.clipsToBounds = true
-        ibMapView.bringSubviewToFront(ibPreviewBUtton)
-        
+//        ibPreviewBUtton.layer.cornerRadius = 0.5 * ibPreviewBUtton.bounds.size.width
+//        ibPreviewBUtton.clipsToBounds = true
+//        ibMapView.bringSubviewToFront(ibPreviewBUtton)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(previewTapped(tapGestureRecognizer:)))
+        self.ibImagePreview.isUserInteractionEnabled = true
+        self.ibImagePreview.addGestureRecognizer(tapGestureRecognizer)
     }
     
     
     func fetchReminders() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            print("mayday mayday")
+//            print("mayday mayday")
             return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Reminder_CD")
-        
+        let sortDescriptor = NSSortDescriptor(key: "createdTime_Date", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         do {
             reminders_CD = try managedContext.fetch(fetchRequest)
             print("\(#function) \(reminders_CD.count)")
@@ -111,6 +120,9 @@ class HistoryViewController: UIViewController {
     }
     
     @IBAction func clickDismissButton(_ sender: UIButton) {
+//        let reminderItem = self.ds[indexPath.section].records[indexPath.row]
+        
+//        let aa = ds[ibHistoryTable.indexPathForSelectedRow?.section].records
         dismiss(animated: true, completion: nil)
     }
     
@@ -206,6 +218,7 @@ extension HistoryViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         moveMarker(indexPath: indexPath)
+        
     }
     
     func moveMarker(indexPath: IndexPath) {
@@ -219,8 +232,58 @@ extension HistoryViewController: UITableViewDataSource {
         marker.map = self.ibMapView
         
         self.ibMapView.animate(to: GMSCameraPosition(target: coordinate, zoom: 20, bearing: 0, viewingAngle: 0))
+        
+        let imageURL = selected.value(forKey: "imageurl_String") as! String
+        
+        if imageURL != "IMAGE_NOT_AVAILABLE" {
+            let imageFile = retrieveImage(imageURL: imageURL)
+            if imageFile != nil {
+                self.ibImagePreview.isHidden = false
+                self.ibImagePreview.makeSquircle()
+                self.ibImagePreview.contentMode = .scaleAspectFill
+        
+                self.ibImagePreviewWidth.constant = (imageFile?.size.width)! * 0.02
+                self.ibImagePreviewHeight.constant = (imageFile?.size.height)! * 0.02
+                self.ibImagePreview.image = imageFile
+            } else {
+                self.ibImagePreview.isHidden = true
+            }
+
+        } else {
+            self.ibImagePreview.isHidden = true
+        }
 //        self.ibMapView.camera = GMSCameraPosition(target: coordinate, zoom: 20, bearing: 0, viewingAngle: 0)
 //        print("PARKED")
+    }
+    
+    func retrieveImage(imageURL: String) -> UIImage? {
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let imagePath = documentsPath.appendingPathComponent(imageURL)
+        if FileManager.default.fileExists(atPath: imagePath.path) {
+            let imageFile = UIImage(contentsOfFile: imagePath.path)
+            return imageFile
+        } else {
+            return nil
+        }
+    }
+    
+    @objc func previewTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        performSegue(withIdentifier: "segueToPreview", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToPreview" { // for moving to review
+            let preview = segue.destination as! PreviewViewController
+            let selectedItem = self.ds[ibHistoryTable.indexPathForSelectedRow!.section].records[ibHistoryTable.indexPathForSelectedRow!.row]
+            
+            let imageURL = selectedItem.value(forKey: "imageurl_String") as! String
+            preview.capturedImage = retrieveImage(imageURL: imageURL)
+            /**preview.callback_clearCapturedImage = { [weak self] in
+                self?.clearCapturedImage()
+            }**/
+            preview.callback_clearCapturedImage = nil
+        }
     }
 }
 

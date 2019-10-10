@@ -162,12 +162,12 @@ class CountdownViewController: UIViewController {
         }
     }
     
-    func secsFormatter(time: Int) -> String {
+    /**func secsFormatter(time: Int) -> String {
         let hours = (time/1000) / 3600
         let minutes = (time/1000) / 60 % 60
         let seconds = (time/1000) % 60
         return String(format:"%02d : %02d : %02d", hours, minutes, seconds)
-    }
+    }**/
     
     
 //    func refreshView() {

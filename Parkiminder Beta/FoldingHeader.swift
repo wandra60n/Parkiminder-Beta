@@ -22,6 +22,7 @@ class FoldingHeader: UITableViewHeaderFooterView {
         super.awakeFromNib()
         self.ibBackgroundView.layer.cornerRadius = 10
         self.ibBackgroundView.clipsToBounds = true
+//        self.ibFoldIcon.tintColor = .white
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHeader)))
     }
     
@@ -40,7 +41,11 @@ class FoldingHeader: UITableViewHeaderFooterView {
     }**/
     
     func rotateIcon(_ collapsed: Bool) {
-        ibFoldIcon.rotate(collapsed ? 0.0 : -.pi / 2)
+        ibFoldIcon.rotate(collapsed ? 0.0 : -.pi)
+        
+//        UIView.animate(withDuration: 2.0, animations: {
+//            self.imageView.transform = CGAffineTransform(rotationAngle: (180.0 * .pi) / 180.0)
+//        })
     }
     
     @IBAction func clickTrashButton(_ sender: UIButton) {

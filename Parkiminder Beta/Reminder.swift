@@ -79,6 +79,12 @@ class Reminder : Codable {
         guard let imageURL = persistImage() as? String else {
             return
         }
+//        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//        //            let imageFilename = String(self.createdTime.timeIntervalSince1970).replacingOccurrences(of: ".", with: "-") + ".JPEG"
+//        let imagePath = documentsPath.appendingPathComponent(imageURL)
+////        print(imagePath)
+//        print(FileManager.default.fileExists(atPath: imagePath.path))
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -111,6 +117,9 @@ class Reminder : Codable {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let imageFilename = String(self.createdTime.timeIntervalSince1970).replacingOccurrences(of: ".", with: "-") + ".JPEG"
         let imageURL = documentsPath.appendingPathComponent(imageFilename)
+        print(imageURL)
+//        let imageFIle = UIImage(data: self.imageData!)
+//        print(imageFIle?.size)
         
         do {
             try self.imageData?.write(to: imageURL)
