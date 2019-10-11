@@ -108,6 +108,8 @@ class Reminder : Codable {
         
     }
     
+    
+    
     func persistImage() -> String? {
         
         if self.imageData == nil {

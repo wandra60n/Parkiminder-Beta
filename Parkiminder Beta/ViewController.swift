@@ -392,7 +392,7 @@ extension ViewController: CLLocationManagerDelegate {
         guard let location = locations.first else {
             return
         }
-        ibMapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 20, bearing: 0, viewingAngle: 0)
+        ibMapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 19, bearing: 0, viewingAngle: 0)
         
         // only get initial location, then stop
         locationManager.stopUpdatingLocation()

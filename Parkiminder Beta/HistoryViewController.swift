@@ -231,7 +231,7 @@ extension HistoryViewController: UITableViewDataSource {
         marker.appearAnimation = .pop
         marker.map = self.ibMapView
         
-        self.ibMapView.animate(to: GMSCameraPosition(target: coordinate, zoom: 20, bearing: 0, viewingAngle: 0))
+        self.ibMapView.animate(to: GMSCameraPosition(target: coordinate, zoom: 19, bearing: 0, viewingAngle: 0))
         
         let imageURL = selected.value(forKey: "imageurl_String") as! String
         
@@ -316,6 +316,7 @@ extension HistoryViewController: FoldingHeaderDelegate {
             
             if self.ds[header.section].clearRecords() {
                 self.ibHistoryTable.reloadSections(NSIndexSet(index: header.section) as IndexSet, with: .automatic)
+                self.ibImagePreview.isHidden = true
                 print("records for \(self.ds[header.section].title) have been cleared.")
             }
             
