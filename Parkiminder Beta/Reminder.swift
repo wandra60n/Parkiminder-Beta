@@ -10,7 +10,16 @@ import Foundation
 import UIKit
 import CoreData
 
-class Reminder : Codable {
+class Reminder : Codable, Equatable {
+    static func == (lhs: Reminder, rhs: Reminder) -> Bool {
+        return lhs.createdTime == rhs.createdTime &&
+            lhs.dueTime == rhs.dueTime &&
+            lhs.latitude == rhs.latitude &&
+            lhs.longitude == rhs.longitude &&
+            lhs.imageData == rhs.imageData &&
+            lhs.description == rhs.description
+    }
+    
     
     let createdTime: Date
     let dueTime: Date
