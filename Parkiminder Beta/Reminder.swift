@@ -50,7 +50,7 @@ class Reminder : Codable, Equatable {
     func saveCurrent() -> Bool{
         do {
             let temp = try PropertyListEncoder().encode(self)
-            UserDefaults.standard.set(temp, forKey: "RUNNING_COUNTDOWN")
+            UserDefaults.standard.set(temp, forKey: constantString.forUserDefaults.rawValue)
             return true
         } catch {
             print(error)
@@ -59,7 +59,7 @@ class Reminder : Codable, Equatable {
     }
     
     static func loadFromUDef() -> Reminder? {
-        guard let tempData = UserDefaults.standard.object(forKey: "RUNNING_COUNTDOWN") as? Data else {
+        guard let tempData = UserDefaults.standard.object(forKey: constantString.forUserDefaults.rawValue) as? Data else {
             return nil
         }
         do {
@@ -72,7 +72,7 @@ class Reminder : Codable, Equatable {
     }
     
     func clearFromUDef() {
-        UserDefaults.standard.removeObject(forKey: "RUNNING_COUNTDOWN")
+        UserDefaults.standard.removeObject(forKey: constantString.forUserDefaults.rawValue)
     }
     
     func isDue() -> Bool {
