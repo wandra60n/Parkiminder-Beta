@@ -54,6 +54,10 @@ class Parkiminder_BetaTests: XCTestCase {
         XCTAssertEqual(self.reminder_after, nil)
     }
     
+    func testSaveToCoreDate() {
+        
+    }
+    
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
