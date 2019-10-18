@@ -10,7 +10,16 @@ import Foundation
 import UIKit
 import CoreData
 
-class Reminder : Codable {
+class Reminder : Codable, Equatable {
+    static func == (lhs: Reminder, rhs: Reminder) -> Bool {
+        return lhs.createdTime == rhs.createdTime &&
+            lhs.dueTime == rhs.dueTime &&
+            lhs.latitude == rhs.latitude &&
+            lhs.longitude == rhs.longitude &&
+            lhs.imageData == rhs.imageData &&
+            lhs.description == rhs.description
+    }
+    
     
     let createdTime: Date
     let dueTime: Date
@@ -41,7 +50,7 @@ class Reminder : Codable {
     func saveCurrent() -> Bool{
         do {
             let temp = try PropertyListEncoder().encode(self)
-            UserDefaults.standard.set(temp, forKey: "RUNNING_COUNTDOWN")
+            UserDefaults.standard.set(temp, forKey: constantString.forUserDefaults.rawValue)
             return true
         } catch {
             print(error)
@@ -50,7 +59,7 @@ class Reminder : Codable {
     }
     
     static func loadFromUDef() -> Reminder? {
-        guard let tempData = UserDefaults.standard.object(forKey: "RUNNING_COUNTDOWN") as? Data else {
+        guard let tempData = UserDefaults.standard.object(forKey: constantString.forUserDefaults.rawValue) as? Data else {
             return nil
         }
         do {
@@ -63,7 +72,7 @@ class Reminder : Codable {
     }
     
     func clearFromUDef() {
-        UserDefaults.standard.removeObject(forKey: "RUNNING_COUNTDOWN")
+        UserDefaults.standard.removeObject(forKey: constantString.forUserDefaults.rawValue)
     }
     
     func isDue() -> Bool {
@@ -107,6 +116,8 @@ class Reminder : Codable {
         }
         
     }
+    
+    
     
     func persistImage() -> String? {
         

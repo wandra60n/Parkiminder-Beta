@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6C8394624F535B1A8952A7DA /* libPods-Parkiminder Beta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EACD05E52BDD4454BDE727DB /* libPods-Parkiminder Beta.a */; };
+		D7043B8F2356C30000A7E988 /* Parkiminder_BetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7043B8E2356C30000A7E988 /* Parkiminder_BetaTests.swift */; };
+		D7043B972356DEA200A7E988 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7043B962356DEA200A7E988 /* Constants.swift */; };
+		D7043BC123581AC600A7E988 /* Parkiminder_BetaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7043BC023581AC600A7E988 /* Parkiminder_BetaUITests.swift */; };
 		D7207091232A04CD0065A710 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7207090232A04CD0065A710 /* HistoryViewController.swift */; };
 		D7207095232A549E0065A710 /* HistoryReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7207094232A549E0065A710 /* HistoryReminderCell.swift */; };
 		D73FC51623179CEF0019D813 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FC51523179CEF0019D813 /* PreviewViewController.swift */; };
@@ -29,9 +32,33 @@
 		D7D9F1972331DA35002F9481 /* FoldingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D9F1962331DA35002F9481 /* FoldingHeaderView.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D7043B912356C30000A7E988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7AEC2A12314C7750056AEFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7AEC2A82314C7750056AEFD;
+			remoteInfo = "Parkiminder Beta";
+		};
+		D7043BC323581AC600A7E988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7AEC2A12314C7750056AEFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7AEC2A82314C7750056AEFD;
+			remoteInfo = "Parkiminder Beta";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		50C913F08CD0E1EF629C70BB /* Pods-Parkiminder Beta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkiminder Beta.release.xcconfig"; path = "Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta.release.xcconfig"; sourceTree = "<group>"; };
 		77AA945FDB83CF8CAC23B207 /* Pods-Parkiminder Beta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkiminder Beta.debug.xcconfig"; path = "Target Support Files/Pods-Parkiminder Beta/Pods-Parkiminder Beta.debug.xcconfig"; sourceTree = "<group>"; };
+		D7043B8C2356C30000A7E988 /* Parkiminder BetaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Parkiminder BetaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7043B8E2356C30000A7E988 /* Parkiminder_BetaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parkiminder_BetaTests.swift; sourceTree = "<group>"; };
+		D7043B902356C30000A7E988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7043B962356DEA200A7E988 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D7043BBE23581AC600A7E988 /* Parkiminder BetaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Parkiminder BetaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7043BC023581AC600A7E988 /* Parkiminder_BetaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parkiminder_BetaUITests.swift; sourceTree = "<group>"; };
+		D7043BC223581AC600A7E988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7207090232A04CD0065A710 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		D7207094232A549E0065A710 /* HistoryReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryReminderCell.swift; sourceTree = "<group>"; };
 		D73FC51523179CEF0019D813 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +84,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D7043B892356C30000A7E988 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7043BBB23581AC600A7E988 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7AEC2A62314C7750056AEFD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,10 +126,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D7043B8D2356C30000A7E988 /* Parkiminder BetaTests */ = {
+			isa = PBXGroup;
+			children = (
+				D7043B8E2356C30000A7E988 /* Parkiminder_BetaTests.swift */,
+				D7043B902356C30000A7E988 /* Info.plist */,
+			);
+			path = "Parkiminder BetaTests";
+			sourceTree = "<group>";
+		};
+		D7043BBF23581AC600A7E988 /* Parkiminder BetaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D7043BC023581AC600A7E988 /* Parkiminder_BetaUITests.swift */,
+				D7043BC223581AC600A7E988 /* Info.plist */,
+			);
+			path = "Parkiminder BetaUITests";
+			sourceTree = "<group>";
+		};
 		D7AEC2A02314C7750056AEFD = {
 			isa = PBXGroup;
 			children = (
 				D7AEC2AB2314C7750056AEFD /* Parkiminder Beta */,
+				D7043B8D2356C30000A7E988 /* Parkiminder BetaTests */,
+				D7043BBF23581AC600A7E988 /* Parkiminder BetaUITests */,
 				D7AEC2AA2314C7750056AEFD /* Products */,
 				9D3DD532426AA61DD2FF38FF /* Pods */,
 				963B17E43E094B39F83A920B /* Frameworks */,
@@ -99,6 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				D7AEC2A92314C7750056AEFD /* Parkiminder Beta.app */,
+				D7043B8C2356C30000A7E988 /* Parkiminder BetaTests.xctest */,
+				D7043BBE23581AC600A7E988 /* Parkiminder BetaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,6 +189,7 @@
 				D7AEC2B82314C7770056AEFD /* LaunchScreen.storyboard */,
 				D7AEC2BB2314C7770056AEFD /* Info.plist */,
 				D7AEC2B32314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld */,
+				D7043B962356DEA200A7E988 /* Constants.swift */,
 			);
 			path = "Parkiminder Beta";
 			sourceTree = "<group>";
@@ -133,6 +197,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D7043B8B2356C30000A7E988 /* Parkiminder BetaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7043B952356C30000A7E988 /* Build configuration list for PBXNativeTarget "Parkiminder BetaTests" */;
+			buildPhases = (
+				D7043B882356C30000A7E988 /* Sources */,
+				D7043B892356C30000A7E988 /* Frameworks */,
+				D7043B8A2356C30000A7E988 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7043B922356C30000A7E988 /* PBXTargetDependency */,
+			);
+			name = "Parkiminder BetaTests";
+			productName = "Parkiminder BetaTests";
+			productReference = D7043B8C2356C30000A7E988 /* Parkiminder BetaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D7043BBD23581AC600A7E988 /* Parkiminder BetaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7043BC523581AC600A7E988 /* Build configuration list for PBXNativeTarget "Parkiminder BetaUITests" */;
+			buildPhases = (
+				D7043BBA23581AC600A7E988 /* Sources */,
+				D7043BBB23581AC600A7E988 /* Frameworks */,
+				D7043BBC23581AC600A7E988 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7043BC423581AC600A7E988 /* PBXTargetDependency */,
+			);
+			name = "Parkiminder BetaUITests";
+			productName = "Parkiminder BetaUITests";
+			productReference = D7043BBE23581AC600A7E988 /* Parkiminder BetaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		D7AEC2A82314C7750056AEFD /* Parkiminder Beta */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D7AEC2BE2314C7770056AEFD /* Build configuration list for PBXNativeTarget "Parkiminder Beta" */;
@@ -158,10 +258,18 @@
 		D7AEC2A12314C7750056AEFD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1030;
+				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = COMP90019;
 				TargetAttributes = {
+					D7043B8B2356C30000A7E988 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = D7AEC2A82314C7750056AEFD;
+					};
+					D7043BBD23581AC600A7E988 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = D7AEC2A82314C7750056AEFD;
+					};
 					D7AEC2A82314C7750056AEFD = {
 						CreatedOnToolsVersion = 10.3;
 					};
@@ -181,11 +289,27 @@
 			projectRoot = "";
 			targets = (
 				D7AEC2A82314C7750056AEFD /* Parkiminder Beta */,
+				D7043B8B2356C30000A7E988 /* Parkiminder BetaTests */,
+				D7043BBD23581AC600A7E988 /* Parkiminder BetaUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D7043B8A2356C30000A7E988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7043BBC23581AC600A7E988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7AEC2A72314C7750056AEFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -242,6 +366,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D7043B882356C30000A7E988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7043B8F2356C30000A7E988 /* Parkiminder_BetaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7043BBA23581AC600A7E988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7043BC123581AC600A7E988 /* Parkiminder_BetaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7AEC2A52314C7750056AEFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,6 +393,7 @@
 				D7AEC2B52314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld in Sources */,
 				D7AEC2AD2314C7750056AEFD /* AppDelegate.swift in Sources */,
 				D73FC5182317D5FB0019D813 /* CustomTimerViewController.swift in Sources */,
+				D7043B972356DEA200A7E988 /* Constants.swift in Sources */,
 				D7207091232A04CD0065A710 /* HistoryViewController.swift in Sources */,
 				D7D9F1952331D9B3002F9481 /* FoldingHeader.swift in Sources */,
 				D773B92A233890790037D524 /* RecordsGroup.swift in Sources */,
@@ -265,6 +406,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D7043B922356C30000A7E988 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7AEC2A82314C7750056AEFD /* Parkiminder Beta */;
+			targetProxy = D7043B912356C30000A7E988 /* PBXContainerItemProxy */;
+		};
+		D7043BC423581AC600A7E988 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7AEC2A82314C7750056AEFD /* Parkiminder Beta */;
+			targetProxy = D7043BC323581AC600A7E988 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D7AEC2B02314C7750056AEFD /* Main.storyboard */ = {
@@ -286,6 +440,88 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D7043B932356C30000A7E988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9N7Z3A7RDJ;
+				INFOPLIST_FILE = "Parkiminder BetaTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "comp.90019.Parkiminder-BetaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Parkiminder Beta.app/Parkiminder Beta";
+			};
+			name = Debug;
+		};
+		D7043B942356C30000A7E988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9N7Z3A7RDJ;
+				INFOPLIST_FILE = "Parkiminder BetaTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "comp.90019.Parkiminder-BetaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Parkiminder Beta.app/Parkiminder Beta";
+			};
+			name = Release;
+		};
+		D7043BC623581AC600A7E988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9N7Z3A7RDJ;
+				INFOPLIST_FILE = "Parkiminder BetaUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "comp.90019.Parkiminder-BetaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Parkiminder Beta";
+			};
+			name = Debug;
+		};
+		D7043BC723581AC600A7E988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9N7Z3A7RDJ;
+				INFOPLIST_FILE = "Parkiminder BetaUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "comp.90019.Parkiminder-BetaUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Parkiminder Beta";
+			};
+			name = Release;
+		};
 		D7AEC2BC2314C7770056AEFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -443,6 +679,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D7043B952356C30000A7E988 /* Build configuration list for PBXNativeTarget "Parkiminder BetaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7043B932356C30000A7E988 /* Debug */,
+				D7043B942356C30000A7E988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7043BC523581AC600A7E988 /* Build configuration list for PBXNativeTarget "Parkiminder BetaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7043BC623581AC600A7E988 /* Debug */,
+				D7043BC723581AC600A7E988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D7AEC2A42314C7750056AEFD /* Build configuration list for PBXProject "Parkiminder Beta" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
