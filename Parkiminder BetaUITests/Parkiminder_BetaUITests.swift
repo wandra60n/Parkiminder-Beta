@@ -65,7 +65,7 @@ class Parkiminder_BetaUITests: XCTestCase {
         offPickerArea.tap()
         // assert custom timer view is dismiss when any point is tapped
         XCTAssertTrue(setButton.exists == false)
-        
+        print("test in progress")
     }
     
     func testSegueFromHome() {
