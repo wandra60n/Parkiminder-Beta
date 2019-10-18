@@ -17,15 +17,8 @@ class Parkiminder_BetaTests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        let dateNow = Date()
-        let dueTime = dateNow + (10 * 60)
-        let latitude = -37.814
-        let longitude = 144.96332
-        let desc = "Melbourne, Australia"
-        let imageData = UIImage(named: "icon_history")?.jpegData(compressionQuality: 1.0)
         
-        reminder_before = Reminder(createdTime: dateNow, dueTime: dueTime, latitude: latitude, longitude: longitude, imageData: imageData, description: desc)
-        reminder_after = nil
+//        reminder_after = nil
     }
 
     override func tearDown() {
@@ -34,9 +27,21 @@ class Parkiminder_BetaTests: XCTestCase {
         reminder_after = nil
         super.tearDown()
     }
+    
+    func setDummyReminder() {
+        let dateNow = Date()
+        let dueTime = dateNow + (10 * 60)
+        let latitude = -37.814
+        let longitude = 144.96332
+        let desc = "Melbourne, Australia"
+        let imageData = UIImage(named: "icon_history")?.jpegData(compressionQuality: 1.0)
+        
+        reminder_before = Reminder(createdTime: dateNow, dueTime: dueTime, latitude: latitude, longitude: longitude, imageData: imageData, description: desc)
+    }
 
     func testSaveToUserdefault() {
         // given
+        setDummyReminder()
         // when
         reminder_before.saveCurrent()
         reminder_after = Reminder.loadFromUDef()
@@ -46,6 +51,7 @@ class Parkiminder_BetaTests: XCTestCase {
     
     func testClearFromUDef() {
         // given
+        setDummyReminder()
         reminder_before.saveCurrent()
         // when
         reminder_before.clearFromUDef()
@@ -54,8 +60,15 @@ class Parkiminder_BetaTests: XCTestCase {
         XCTAssertEqual(self.reminder_after, nil)
     }
     
-    func testSaveToCoreDate() {
-        
+    func testPersistImage() {
+        // given
+        setDummyReminder()
+        let dunno = HistoryViewController()
+        // when
+        let tempImageName = reminder_before.persistImage()
+        let tempImage = dunno.retrieveImage(imageURL: tempImageName!)
+        // then
+        XCTAssertEqual(reminder_before.imageData, tempImage?.jpegData(compressionQuality: 1.0))
     }
     
 
