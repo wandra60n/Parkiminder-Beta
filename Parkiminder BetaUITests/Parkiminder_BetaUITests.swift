@@ -86,7 +86,7 @@ class Parkiminder_BetaUITests: XCTestCase {
         backButton.tap()
         
         XCTAssertFalse(thisMonthSection.exists || last3MonthsSection.exists || moreSection.exists)
-        
+        print("check github status")
     }
 
     func testLaunchPerformance() {
