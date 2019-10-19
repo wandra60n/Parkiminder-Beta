@@ -77,7 +77,7 @@ class Reminder : Codable, Equatable {
     }
     
     func isDue() -> Bool {
-        let delta = dueTime.timeIntervalSinceNow // maybe ceil this into seconds first
+        let delta = dueTime.timeIntervalSinceNow
         if delta <= 0 {
             return true
         } else {
@@ -89,12 +89,6 @@ class Reminder : Codable, Equatable {
         guard let imageURL = persistImage() as? String else {
             return
         }
-//        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        //            let imageFilename = String(self.createdTime.timeIntervalSince1970).replacingOccurrences(of: ".", with: "-") + ".JPEG"
-//        let imagePath = documentsPath.appendingPathComponent(imageURL)
-////        print(imagePath)
-//        print(FileManager.default.fileExists(atPath: imagePath.path))
-        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -118,21 +112,46 @@ class Reminder : Codable, Equatable {
         
     }
     
+    static func retrieveImage(imageURL: String) -> Data? {
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let imagePath = documentsPath.appendingPathComponent(imageURL)
+        if FileManager.default.fileExists(atPath: imagePath.path) {
+//            let imageData = Data(contentsOf: <#T##URL#>)
+            do {
+                let imageData = try Data(contentsOf: imagePath)
+                return imageData
+            } catch {
+                print("error retireve data")
+                return nil
+            }
+//            let imageFile = UIImage(contentsOfFile: imagePath.path)
+//            return imageFile
+        } else {
+            return nil
+        }
+    }
     
+    static func clearImagePersistance(imageName: String) -> Bool{
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let imagePath = documentsPath.appendingPathComponent(imageName)
+        do {
+            try FileManager.default.removeItem(atPath: imagePath.path)
+            return true
+        } catch {
+            print("can not delete image data")
+            return false
+        }
+    }
     
     func persistImage() -> String? {
-        
         if self.imageData == nil {
             return "IMAGE_NOT_AVAILABLE"
         }
-        
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let imageFilename = String(self.createdTime.timeIntervalSince1970).replacingOccurrences(of: ".", with: "-") + ".JPEG"
         let imageURL = documentsPath.appendingPathComponent(imageFilename)
         print(imageURL)
-//        let imageFIle = UIImage(data: self.imageData!)
-//        print(imageFIle?.size)
-        
+
         do {
             try self.imageData?.write(to: imageURL)
 //            print(String(imageFilename))

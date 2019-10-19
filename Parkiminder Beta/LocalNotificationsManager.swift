@@ -71,6 +71,7 @@ class LocalNotificationsManager {
     }
 }
 
+// creating struct instead of class, only need object to hold attribute
 struct Notification {
     var id: String
     var title: String

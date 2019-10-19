@@ -25,7 +25,7 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchReminders()
+        self.reminders_CD = fetchReminders()
         // create record groups
         ds.append(RecordsGroup(title: "This Month", collapsed: false))
         ds.append(RecordsGroup(title: "Last 3 Months", collapsed: true))
@@ -62,10 +62,14 @@ class HistoryViewController: UIViewController {
     }
     
     // load reminders from core data
-    func fetchReminders() {
+    func fetchReminders() -> [NSManagedObject] {
+        var tempReminders: [NSManagedObject]
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
+            tempReminders = []
+            return tempReminders
         }
+        
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Reminder_CD")
         // sort records
@@ -73,10 +77,14 @@ class HistoryViewController: UIViewController {
         fetchRequest.sortDescriptors = [sortDescriptor]
         // atttach content to attribute
         do {
-            reminders_CD = try managedContext.fetch(fetchRequest)
-            print("\(#function) \(reminders_CD.count)")
+            tempReminders = try managedContext.fetch(fetchRequest)
+//            reminders_CD = try managedContext.fetch(fetchRequest)
+//            print("\(#function) \(reminders_CD.count)")
+            return tempReminders
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
+            tempReminders = []
+            return tempReminders
         }
     }
     
@@ -166,7 +174,11 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         let imageURL = selected.value(forKey: "imageurl_String") as! String
         
         if imageURL != "IMAGE_NOT_AVAILABLE" {
-            let imageFile = retrieveImage(imageURL: imageURL)
+            let imageData = Reminder.retrieveImage(imageURL: imageURL)
+            let imageFile = UIImage(data: imageData!)
+            
+//            let imageFile = Reminder.retrieveImage(imageURL: imageURL)
+//            let imageFile = retrieveImage(imageURL: imageURL)
             if imageFile != nil {
                 self.ibImagePreview.isHidden = false
                 self.ibImagePreview.makeSquircle()
@@ -205,7 +217,9 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
             let selectedItem = self.ds[ibHistoryTable.indexPathForSelectedRow!.section].records[ibHistoryTable.indexPathForSelectedRow!.row]
             
             let imageURL = selectedItem.value(forKey: "imageurl_String") as! String
-            preview.capturedImage = retrieveImage(imageURL: imageURL)
+            let imageData = Reminder.retrieveImage(imageURL: imageURL)
+            preview.capturedImage = UIImage(data: imageData!)
+//            preview.capturedImage = retrieveImage(imageURL: imageURL)
             preview.callback_clearCapturedImage = nil
         }
     }

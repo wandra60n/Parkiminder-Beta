@@ -9,16 +9,14 @@
 import XCTest
 @testable import Parkiminder_Beta
 
-class Parkiminder_BetaTests: XCTestCase {
+class ReminderTests: XCTestCase {
     var reminder_before: Reminder!
     var reminder_after: Reminder!
     
-
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        
-//        reminder_after = nil
+        setDummyReminder()
     }
 
     override func tearDown() {
@@ -41,7 +39,7 @@ class Parkiminder_BetaTests: XCTestCase {
 
     func testSaveToUserdefault() {
         // given
-        setDummyReminder()
+        
         // when
         reminder_before.saveCurrent()
         reminder_after = Reminder.loadFromUDef()
@@ -51,7 +49,7 @@ class Parkiminder_BetaTests: XCTestCase {
     
     func testClearFromUDef() {
         // given
-        setDummyReminder()
+        
         reminder_before.saveCurrent()
         // when
         reminder_before.clearFromUDef()
@@ -62,21 +60,24 @@ class Parkiminder_BetaTests: XCTestCase {
     
     func testPersistImage() {
         // given
-        setDummyReminder()
-        let dunno = HistoryViewController()
+        
         // when
         let tempImageName = reminder_before.persistImage()
-        let tempImage = dunno.retrieveImage(imageURL: tempImageName!)
+        let tempImageData = Reminder.retrieveImage(imageURL: tempImageName!)
         // then
-        XCTAssertEqual(reminder_before.imageData, tempImage?.jpegData(compressionQuality: 1.0))
+        XCTAssertTrue(tempImageData == reminder_before.imageData)
     }
     
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testDeleteImage() {
+        // given
+        
+        // when
+        let tempImageName = reminder_before.persistImage()
+        Reminder.clearImagePersistance(imageName: tempImageName!)
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let imagePath = documentsPath.appendingPathComponent(tempImageName!)
+        // then
+        XCTAssertFalse(FileManager.default.fileExists(atPath: imagePath.path))
     }
 
 }
