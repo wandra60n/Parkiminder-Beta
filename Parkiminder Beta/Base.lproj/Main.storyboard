@@ -206,13 +206,13 @@
                                 </cells>
                             </collectionView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bluecar" translatesAutoresizingMaskIntoConstraints="NO" id="FQD-Pm-gVB">
-                                <rect key="frame" x="167" y="197.5" width="41" height="41"/>
+                                <rect key="frame" x="167" y="197.5" width="41.000000000000057" height="41.000000000000057"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="GKD-2a-ySF"/>
                                     <constraint firstAttribute="width" constant="41" id="N6R-kR-a0Q"/>
                                 </constraints>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQe-Ob-1Df">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQe-Ob-1Df">
                                 <rect key="frame" x="7" y="618" width="61" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
@@ -261,7 +261,7 @@
                         <outlet property="ibDescriptionText" destination="AHe-EF-3NN" id="HAt-3f-cDG"/>
                         <outlet property="ibHistoryButton" destination="4fB-sl-UJg" id="llf-13-BdK"/>
                         <outlet property="ibMapView" destination="VwG-Mz-6j9" id="GdQ-hw-bxv"/>
-                        <segue destination="wff-YY-Rkr" kind="show" identifier="segueToCountdown" id="SKg-e4-yB9"/>
+                        <segue destination="wff-YY-Rkr" kind="show" identifier="segueToCountdown" animates="NO" id="SKg-e4-yB9"/>
                         <segue destination="64C-VX-Pgj" kind="presentation" identifier="segueToPreview" modalTransitionStyle="crossDissolve" id="Yyp-Uw-lKn"/>
                         <segue destination="1B3-Tu-UyM" kind="presentation" identifier="segueToCustomTimer" modalTransitionStyle="crossDissolve" id="433-TB-koj"/>
                         <segue destination="cqV-dD-b7B" kind="show" identifier="segueToHistory" id="m4G-2h-dIf"/>
@@ -344,7 +344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZr-uJ-evj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1222" y="804"/>
+            <point key="canvasLocation" x="1022" y="804"/>
         </scene>
         <!--Custom Timer View Controller-->
         <scene sceneID="Mp2-Jo-kBS">
@@ -568,7 +568,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKR-Lw-VEY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="0.0"/>
+            <point key="canvasLocation" x="1815" y="27"/>
         </scene>
         <!--Countdown View Controller-->
         <scene sceneID="XAl-sP-ZaZ">
@@ -743,7 +743,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8e-JD-FWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1023" y="0.0"/>
+            <point key="canvasLocation" x="1022" y="-340"/>
         </scene>
     </scenes>
     <resources>

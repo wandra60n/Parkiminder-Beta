@@ -28,37 +28,29 @@ class CountdownViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-//        refreshView()
-        self.ibDoneButton.layer.cornerRadius = 10
-        self.ibDoneButton.clipsToBounds = true
+        
+        initAppObserver()
+        
+        self.ibDoneButton.makeSquircle()
         self.ibNavigateButton.makeCircle()
         self.ibImagePreview.makeSquircle()
         self.ibDescriptionViewText.makeSquircle()
-        initAppObserver()
-        
         
         if countdownTask?.isDue() == false && self.timer == nil {
-//            durationLeft = Int(countdownTask!.dueTime.timeIntervalSinceNow * 1000)
             durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
-            
             loadElements()
             runTimer()
         } else {
-            print("i am doing nothing now")
+            loadElements()
+            self.ibTimeLabel.text = "Parking has ended"
         }
-        /**
-        durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
-        if durationLeft! > 0 {
-            runTimer()
-        }**/
-        
     }
     
+    // allowing view to get specified application state from appdelegate
     func initAppObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminate), name: UIApplication.willTerminateNotification, object: nil)
     }
     
     @objc func previewTapped(tapGestureRecognizer: UITapGestureRecognizer)
@@ -67,12 +59,10 @@ class CountdownViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToPreview" { // for moving to review
+        // preview image on tap
+        if segue.identifier == "segueToPreview" {
             let preview = segue.destination as! PreviewViewController
             preview.capturedImage = UIImage(data: (self.countdownTask?.imageData)!)
-            /**preview.callback_clearCapturedImage = { [weak self] in
-                self?.clearCapturedImage()
-            }**/
             preview.callback_clearCapturedImage = nil
         }
     }
@@ -98,7 +88,6 @@ class CountdownViewController: UIViewController {
         self.ibImagePreview.contentMode = .scaleToFill
         
         // load image preview
-        
         if self.countdownTask?.imageData == nil {
             // make sure image preview is hidden
             self.ibCapturedView.isHidden = true
@@ -128,131 +117,65 @@ class CountdownViewController: UIViewController {
         
     }
     
+    @objc func applicationWillTerminate(notification : NSNotification) {
+        print("\(#function)")
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        // Saves changes in the application's managed object context before the application terminates.
+        self.countdownTask.saveCurrent()
+    }
+    
+    
+    
     @objc func applicationDidBecomeActive(notification : NSNotification) {
-//        print("sneeze")
         print("\(#function)")
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
-//        durationLeft = Int(countdownTask!.dueTime.timeIntervalSinceNow * 1000)
         durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
         if self.timer?.isValid == false {
             loadElements()
             runTimer()
         }
-        // reset the timer display here
-//        self.ibTimeLabel.text = "00 : 00 : 00"
-        self.ibTimeLabel.text = "Parking has ended"
     }
     
     func runTimer() {
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-//        self.timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer() {
         if durationLeft! >= 0 {
-            /**if durationLeft! % 1000 == 0 {
-                ibTimeLabel.text = secsFormatter(time: durationLeft!)
-            }**/
-//            ibTimeLabel.text = secsFormatter(time: durationLeft!)
             ibTimeLabel.text = Double(durationLeft!).toString()
             durationLeft! -= 1
         } else {
-//            backToMain()
+            self.ibTimeLabel.text = "Parking has ended"
         }
     }
     
-    /**func secsFormatter(time: Int) -> String {
-        let hours = (time/1000) / 3600
-        let minutes = (time/1000) / 60 % 60
-        let seconds = (time/1000) % 60
-        return String(format:"%02d : %02d : %02d", hours, minutes, seconds)
-    }**/
-    
-    
-//    func refreshView() {
-//        /**let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        ibTimeLabel.text = formatter.string(from: countdownTask!.dueTime)**/
-//
-//        durationLeft = Int(ceil(countdownTask!.dueTime.timeIntervalSinceNow))
-//        ibTimeLabel.text = String(durationLeft!)
-//    }
     
     @IBAction func clickDismissButton(_ sender: UIButton) {
-//        localNotificationsManager?.clearScheduledNotifications()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         backToMain()
     }
     
     func backToMain() {
         timer?.invalidate()
-//        UserDefaults.standard.set(false, forKey: "COUNTDOWN_IS_RUNNING")
         countdownTask?.clearFromUDef()
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func clickDirectionButton(_ sender: UIButton) {
-        
         var mapURL: String = "https://www.google.com/maps/search/?api=1&query="
         mapURL.append(String(self.countdownTask.latitude))
         mapURL.append(",")
         mapURL.append(String(self.countdownTask.longitude))
         UIApplication.shared.open(URL(string: mapURL)!, options: [:], completionHandler: nil)
-//        if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
-//            UIApplication.sharedApplication().openURL(NSURL(string:
-//                "comgooglemaps://?saddr=&daddr=\(place.latitude),\(place.longitude)&directionsmode=driving")!)
-//
-//        } else {
-//            NSLog("Can't use comgooglemaps://");
-//        }
     }
         
     @IBAction func clickDoneButton(_ sender: UIButton) {
-        // persist the reminder, dont forget for nil image
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        // record the reminder
         countdownTask.persistToCD()
         backToMain()
     }
-    //        mapURL.append(String(self.countdownTask?.latitude))
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            do {
-                let data = try Data(contentsOf: url)
-                guard let image = UIImage(data: data) else {
-                    print("invalid image data retrieved")
-                    return
-                }
-                DispatchQueue.main.async {
-                    self?.image = image
-                    print("static map loaded")
-                }
-            } catch {
-                print("url error")
-                return
-            }
-            /**if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                        print("static map loaded")
-                    }
-                }
-            }**/
-        }
-    }
-}
+

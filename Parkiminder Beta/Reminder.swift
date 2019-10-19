@@ -51,6 +51,7 @@ class Reminder : Codable, Equatable {
         do {
             let temp = try PropertyListEncoder().encode(self)
             UserDefaults.standard.set(temp, forKey: constantString.forUserDefaults.rawValue)
+            print("\(#function)")
             return true
         } catch {
             print(error)

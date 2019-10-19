@@ -11,6 +11,7 @@
 		D7043B8F2356C30000A7E988 /* Parkiminder_BetaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7043B8E2356C30000A7E988 /* Parkiminder_BetaTests.swift */; };
 		D7043B972356DEA200A7E988 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7043B962356DEA200A7E988 /* Constants.swift */; };
 		D7043BC123581AC600A7E988 /* Parkiminder_BetaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7043BC023581AC600A7E988 /* Parkiminder_BetaUITests.swift */; };
+		D7043BC9235AEEB800A7E988 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7043BC8235AEEB700A7E988 /* Extensions.swift */; };
 		D7207091232A04CD0065A710 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7207090232A04CD0065A710 /* HistoryViewController.swift */; };
 		D7207095232A549E0065A710 /* HistoryReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7207094232A549E0065A710 /* HistoryReminderCell.swift */; };
 		D73FC51623179CEF0019D813 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FC51523179CEF0019D813 /* PreviewViewController.swift */; };
@@ -59,6 +60,7 @@
 		D7043BBE23581AC600A7E988 /* Parkiminder BetaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Parkiminder BetaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7043BC023581AC600A7E988 /* Parkiminder_BetaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parkiminder_BetaUITests.swift; sourceTree = "<group>"; };
 		D7043BC223581AC600A7E988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7043BC8235AEEB700A7E988 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D7207090232A04CD0065A710 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		D7207094232A549E0065A710 /* HistoryReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryReminderCell.swift; sourceTree = "<group>"; };
 		D73FC51523179CEF0019D813 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				D7AEC2BB2314C7770056AEFD /* Info.plist */,
 				D7AEC2B32314C7750056AEFD /* Parkiminder_Beta.xcdatamodeld */,
 				D7043B962356DEA200A7E988 /* Constants.swift */,
+				D7043BC8235AEEB700A7E988 /* Extensions.swift */,
 			);
 			path = "Parkiminder Beta";
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				D7D5CCD82316720100E68F5B /* LocalNotificationsManager.swift in Sources */,
 				D76FE6522314D8B400F8CB18 /* Reminder.swift in Sources */,
 				D741DEB92346719400FE1C51 /* ButtonCollectionViewCell.swift in Sources */,
+				D7043BC9235AEEB800A7E988 /* Extensions.swift in Sources */,
 				D7B1D5D8234F0868006F94D7 /* Helpers.swift in Sources */,
 				D7CAB02A2333202700729440 /* NoRecordController.swift in Sources */,
 			);
