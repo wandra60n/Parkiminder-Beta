@@ -15,7 +15,7 @@ class CountdownViewController: UIViewController {
     var countdownTask: Reminder!
     var timer: Timer?
     var durationLeft: Int?
-//    var localNotificationsManager: LocalNotificationsManager?
+    var localNotificationsManager: LocalNotificationsManager?
     
     @IBOutlet weak var ibTimeLabel: UILabel!
     @IBOutlet weak var ibImagePreview: UIImageView!
@@ -30,7 +30,7 @@ class CountdownViewController: UIViewController {
         super.viewDidLoad()
         
         initAppObserver()
-        
+        self.localNotificationsManager = LocalNotificationsManager()
         self.ibDoneButton.makeSquircle()
         self.ibNavigateButton.makeCircle()
         self.ibImagePreview.makeSquircle()
@@ -151,7 +151,11 @@ class CountdownViewController: UIViewController {
     
     
     @IBAction func clickDismissButton(_ sender: UIButton) {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        localNotificationsManager?.notificationCenter.getPendingNotificationRequests { (notifications) in
+            print(notifications.count)
+        }
+        self.localNotificationsManager?.clearScheduledNotifications()
+//        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         backToMain()
     }
     
@@ -170,7 +174,7 @@ class CountdownViewController: UIViewController {
     }
         
     @IBAction func clickDoneButton(_ sender: UIButton) {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        localNotificationsManager?.clearScheduledNotifications()
         // record the reminder
         countdownTask.persistToCD()
         backToMain()

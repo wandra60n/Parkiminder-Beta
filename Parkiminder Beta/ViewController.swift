@@ -210,6 +210,9 @@ class ViewController: UIViewController {
             }
         }
         localNotificationsManager.schedule()
+        localNotificationsManager.notificationCenter.getPendingNotificationRequests { (notifications) in
+            print(notifications.count)
+        }
     }
     
     // this method is used to initialize x this month, y last 3 months and z more months dummy reminder

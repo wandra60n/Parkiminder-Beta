@@ -6,31 +6,42 @@
 //  Copyright © 2019 COMP90019. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import UserNotifications
 
 class LocalNotificationsManager {
-    var notifications = [Notification]()
     
-    func listScheduledNotifications() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (notifications) in
-            for notification in notifications {
-                print(notification)
-            }
-        }
+    var notifications: [Notification]
+    var notificationCenter: UNUserNotificationCenter
+    
+    init() {
+        notifications = [Notification]()
+        notificationCenter = UNUserNotificationCenter.current()
     }
     
     func clearScheduledNotifications() {
         print("\(#function)")
-        var arrayNotificationsID = [String]()
+        notificationCenter.removeAllPendingNotificationRequests()
+        /**var arrayNotificationsID = [String]()
         for notification in self.notifications {
             arrayNotificationsID.append(notification.id)
         }
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: arrayNotificationsID)
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: arrayNotificationsID)**/
+    }
+    
+    func listScheduledNotifications() {
+        print("\(#function)")
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (notifications) in
+            print("jumlah: " + String(notifications.count))
+            for notification in notifications {
+                print(notification.content.title)
+            }
+        }
     }
     
     private func requestAuthorization() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted == true && error == nil {
                 self.scheduleNotifications()
             }
@@ -38,7 +49,7 @@ class LocalNotificationsManager {
     }
     
     func schedule() {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
+        notificationCenter.getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .notDetermined:
                 self.requestAuthorization()
@@ -60,7 +71,7 @@ class LocalNotificationsManager {
             let trigger = UNCalendarNotificationTrigger(dateMatching: notification.datetime, repeats: false)
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
             
-            UNUserNotificationCenter.current().add(request) { (error) in
+            notificationCenter.add(request) { (error) in
                 guard error == nil else {
                     return
                 }

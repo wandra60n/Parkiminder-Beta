@@ -1,5 +1,5 @@
 //
-//  RecordsGroupTest.swift
+//  RecordsGroupTests.swift
 //  Parkiminder BetaTests
 //
 //  Created by dading on 19/10/19.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Parkiminder_Beta
 
-class RecordsGroupTest: XCTestCase {
+class RecordsGroupTests: XCTestCase {
     var testGroup: RecordsGroup!
     let recordNum = 7
     

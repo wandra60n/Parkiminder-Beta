@@ -1,5 +1,5 @@
 //
-//  Parkiminder_BetaTests.swift
+//  ReminderTests.swift
 //  Parkiminder BetaTests
 //
 //  Created by dading on 16/10/19.
