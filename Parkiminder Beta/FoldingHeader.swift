@@ -22,7 +22,6 @@ class FoldingHeader: UITableViewHeaderFooterView {
         super.awakeFromNib()
         self.ibBackgroundView.layer.cornerRadius = 10
         self.ibBackgroundView.clipsToBounds = true
-//        self.ibFoldIcon.tintColor = .white
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHeader)))
     }
     
@@ -32,27 +31,15 @@ class FoldingHeader: UITableViewHeaderFooterView {
         }
         delegate?.toggleSection(self, section: tapped.section)
     }
-    /**override func addGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
-        guard let cell = gestureRecognizer.view as? FoldingHeader else {
-            return
-        }
-        delegate?.toggleSection(self, section: cell.section)
-        print("tapped")
-    }**/
     
     func rotateIcon(_ collapsed: Bool) {
         ibFoldIcon.rotate(collapsed ? 0.0 : -.pi)
-        
-//        UIView.animate(withDuration: 2.0, animations: {
-//            self.imageView.transform = CGAffineTransform(rotationAngle: (180.0 * .pi) / 180.0)
-//        })
     }
     
     @IBAction func clickTrashButton(_ sender: UIButton) {
         delegate?.clearRecordsInSection(header: self)
     }
 }
-
 
 protocol FoldingHeaderDelegate {
     func toggleSection(_ header: FoldingHeader, section: Int)

@@ -11,5 +11,4 @@ import UIKit
 class ButtonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ibValueLabel: UILabel!
     @IBOutlet weak var ibMetricButton: UILabel!
-    
 }

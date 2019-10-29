@@ -48,9 +48,12 @@ class CountdownViewController: UIViewController {
     
     // allowing view to get specified application state from appdelegate
     func initAppObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminate), name: UIApplication.willTerminateNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground),
+                                               name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminate),
+                                               name: UIApplication.willTerminateNotification, object: nil)
     }
     
     @objc func previewTapped(tapGestureRecognizer: UITapGestureRecognizer)
@@ -123,8 +126,6 @@ class CountdownViewController: UIViewController {
         // Saves changes in the application's managed object context before the application terminates.
         self.countdownTask.saveCurrent()
     }
-    
-    
     
     @objc func applicationDidBecomeActive(notification : NSNotification) {
         print("\(#function)")

@@ -23,14 +23,9 @@ class LocalNotificationsManager {
     func clearScheduledNotifications() {
         print("\(#function)")
         notificationCenter.removeAllPendingNotificationRequests()
-        /**var arrayNotificationsID = [String]()
-        for notification in self.notifications {
-            arrayNotificationsID.append(notification.id)
-        }
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: arrayNotificationsID)**/
     }
     
-    func listScheduledNotifications() {
+    /**func listScheduledNotifications() {
         print("\(#function)")
         UNUserNotificationCenter.current().getPendingNotificationRequests { (notifications) in
             print("jumlah: " + String(notifications.count))
@@ -38,7 +33,7 @@ class LocalNotificationsManager {
                 print(notification.content.title)
             }
         }
-    }
+    }**/
     
     private func requestAuthorization() {
         notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in

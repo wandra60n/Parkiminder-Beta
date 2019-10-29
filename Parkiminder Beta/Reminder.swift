@@ -10,16 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class Reminder : Codable, Equatable {
-    static func == (lhs: Reminder, rhs: Reminder) -> Bool {
-        return lhs.createdTime == rhs.createdTime &&
-            lhs.dueTime == rhs.dueTime &&
-            lhs.latitude == rhs.latitude &&
-            lhs.longitude == rhs.longitude &&
-            lhs.imageData == rhs.imageData &&
-            lhs.description == rhs.description
-    }
-    
+class Reminder : Codable /**, Equatable**/ {
     
     let createdTime: Date
     let dueTime: Date
@@ -37,20 +28,19 @@ class Reminder : Codable, Equatable {
         self.description = description
     }
     
-    /**
-     init() { // dummy implementation only
-        self.createdTime = Date()
-        self.dueTime = createdTime + 15
-        self.latitude = -37.808163434
-        self.longitude = 144.957829502
-        self.imageData = nil
-        self.description = "this is Melbourne"
+    /**static func == (lhs: Reminder, rhs: Reminder) -> Bool {
+        return lhs.createdTime == rhs.createdTime &&
+            lhs.dueTime == rhs.dueTime &&
+            lhs.latitude == rhs.latitude &&
+            lhs.longitude == rhs.longitude &&
+            lhs.imageData == rhs.imageData &&
+            lhs.description == rhs.description
     }**/
     
     func saveCurrent() -> Bool{
         do {
             let temp = try PropertyListEncoder().encode(self)
-            UserDefaults.standard.set(temp, forKey: constantString.forUserDefaults.rawValue)
+            UserDefaults.standard.set(temp, forKey: constantString.keyUserDefaults.rawValue)
             print("\(#function)")
             return true
         } catch {
@@ -60,7 +50,7 @@ class Reminder : Codable, Equatable {
     }
     
     static func loadFromUDef() -> Reminder? {
-        guard let tempData = UserDefaults.standard.object(forKey: constantString.forUserDefaults.rawValue) as? Data else {
+        guard let tempData = UserDefaults.standard.object(forKey: constantString.keyUserDefaults.rawValue) as? Data else {
             return nil
         }
         do {
@@ -73,7 +63,7 @@ class Reminder : Codable, Equatable {
     }
     
     func clearFromUDef() {
-        UserDefaults.standard.removeObject(forKey: constantString.forUserDefaults.rawValue)
+        UserDefaults.standard.removeObject(forKey: constantString.keyUserDefaults.rawValue)
     }
     
     func isDue() -> Bool {
@@ -86,22 +76,23 @@ class Reminder : Codable, Equatable {
     }
     
     func persistToCD() {
-        guard let imageURL = persistImage() as? String else {
+        /**guard let imageURL = persistImage() as? String else {
             return
-        }
+        }**/
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
+        let imageURL = persistImage()
         let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Reminder_CD", in: managedContext)!
+        let entity = NSEntityDescription.entity(forEntityName: constantString.entityNameReminder.rawValue, in: managedContext)!
         
         let reminder = NSManagedObject(entity: entity, insertInto: managedContext)
-        reminder.setValue(self.createdTime, forKeyPath: "createdTime_Date")
-        reminder.setValue(self.description, forKeyPath: "description_String")
-        reminder.setValue(self.dueTime, forKeyPath: "dueTime_Date")
-        reminder.setValue(imageURL, forKeyPath: "imageurl_String")
-        reminder.setValue(self.latitude, forKeyPath: "latitude_Double")
-        reminder.setValue(self.longitude, forKeyPath: "longitude_Double")
+        reminder.setValue(self.createdTime, forKeyPath: constantString.attributeCreatedTime.rawValue)
+        reminder.setValue(self.description, forKeyPath: constantString.attributeDescription.rawValue)
+        reminder.setValue(self.dueTime, forKeyPath: constantString.attributeDueTime.rawValue)
+        reminder.setValue(imageURL, forKeyPath: constantString.attributeImageURL.rawValue)
+        reminder.setValue(self.latitude, forKeyPath: constantString.attributeLatitude.rawValue)
+        reminder.setValue(self.longitude, forKeyPath: constantString.attributeLongitude.rawValue)
         
         do {
             try managedContext.save()
@@ -116,7 +107,6 @@ class Reminder : Codable, Equatable {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let imagePath = documentsPath.appendingPathComponent(imageURL)
         if FileManager.default.fileExists(atPath: imagePath.path) {
-//            let imageData = Data(contentsOf: <#T##URL#>)
             do {
                 let imageData = try Data(contentsOf: imagePath)
                 return imageData
@@ -124,14 +114,12 @@ class Reminder : Codable, Equatable {
                 print("error retireve data")
                 return nil
             }
-//            let imageFile = UIImage(contentsOfFile: imagePath.path)
-//            return imageFile
         } else {
             return nil
         }
     }
     
-    static func clearImagePersistance(imageName: String) -> Bool{
+    static func clearImagePersistance(imageName: String) -> Bool {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let imagePath = documentsPath.appendingPathComponent(imageName)
         do {
@@ -145,7 +133,7 @@ class Reminder : Codable, Equatable {
     
     func persistImage() -> String? {
         if self.imageData == nil {
-            return "IMAGE_NOT_AVAILABLE"
+            return constantString.imageUnavailable.rawValue
         }
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let imageFilename = String(self.createdTime.timeIntervalSince1970).replacingOccurrences(of: ".", with: "-") + ".JPEG"
@@ -154,7 +142,6 @@ class Reminder : Codable, Equatable {
 
         do {
             try self.imageData?.write(to: imageURL)
-//            print(String(imageFilename))
             return String(imageFilename)
         } catch {
             print("can not save file \(imageURL)")

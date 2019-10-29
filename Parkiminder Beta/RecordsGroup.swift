@@ -29,16 +29,9 @@ class RecordsGroup {
         
         for record in records {
             // delete image data if any
-            let imageName = record.value(forKey: "imageurl_String") as! String
-            if imageName != "IMAGE_NOT_AVAILABLE" {
+            let imageName = record.value(forKey: constantString.attributeImageURL.rawValue) as! String
+            if imageName != constantString.imageUnavailable.rawValue {
                 Reminder.clearImagePersistance(imageName: imageName)
-                /**let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let imagePath = documentsPath.appendingPathComponent(imageName)
-                do {
-                    try FileManager.default.removeItem(atPath: imagePath.path)
-                } catch {
-                    print("can not delete image data")
-                }**/
             }
             // delete from core data
             managedContext.delete(record)

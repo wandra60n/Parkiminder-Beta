@@ -26,15 +26,16 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
         
         self.reminders_CD = fetchReminders()
+        self.ibMapView.delegate = self
         // create record groups
-        ds.append(RecordsGroup(title: "This Month", collapsed: false))
-        ds.append(RecordsGroup(title: "Last 3 Months", collapsed: true))
-        ds.append(RecordsGroup(title: "More", collapsed: true))
+        ds.append(RecordsGroup(title: constantString.historyGroup1.rawValue, collapsed: false))
+        ds.append(RecordsGroup(title: constantString.historyGroup2.rawValue, collapsed: true))
+        ds.append(RecordsGroup(title: constantString.historyGroup3.rawValue, collapsed: true))
         
         // load record from core data to groups
         while reminders_CD.count > 0 {
             let tempRecord = reminders_CD.popLast()
-            let recordDate = tempRecord!.value(forKey: "createdTime_Date") as! Date
+            let recordDate = tempRecord!.value(forKey: constantString.attributeCreatedTime.rawValue) as! Date
             if recordDate.isInSameMonth(date: Date()) {
                 ds[0].records.append(tempRecord!)
             } else if recordDate.isInPreviousMonths(date: Date(), n: 3) {
@@ -71,9 +72,9 @@ class HistoryViewController: UIViewController {
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Reminder_CD")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: constantString.entityNameReminder.rawValue)
         // sort records
-        let sortDescriptor = NSSortDescriptor(key: "createdTime_Date", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: constantString.attributeCreatedTime.rawValue, ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         // atttach content to attribute
         do {
@@ -121,10 +122,10 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
 
         // formatting cell content
         let reminderItem = self.ds[indexPath.section].records[indexPath.row]
-        historyCell.ibDescriptionLabel.text = (reminderItem.value(forKey: "description_String") as! String)
+        historyCell.ibDescriptionLabel.text = (reminderItem.value(forKey: constantString.attributeDescription.rawValue) as! String)
         
-        let createdTime = reminderItem.value(forKeyPath: "createdTime_Date") as! Date
-        let dueTime = reminderItem.value(forKey: "dueTime_Date") as! Date
+        let createdTime = reminderItem.value(forKeyPath: constantString.attributeCreatedTime.rawValue) as! Date
+        let dueTime = reminderItem.value(forKey: constantString.attributeDueTime.rawValue) as! Date
         let formatter = DateComponentsFormatter()
         let parkingDuration = dueTime.timeIntervalSince(createdTime)
         formatter.allowedUnits = [.day, .hour, .minute]
@@ -155,15 +156,16 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         
         return headerView
     }
+    
     // determine header height
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
-    // we will update the map view everytime record is tapped
+    // update the map when record is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.ibMapView.clear()
         let selected = self.ds[indexPath.section].records[indexPath.row]
-        let coordinate = CLLocationCoordinate2D(latitude: selected.value(forKey: "latitude_Double") as! Double, longitude: selected.value(forKey: "longitude_Double") as! Double)
+        let coordinate = CLLocationCoordinate2D(latitude: selected.value(forKey: constantString.attributeLatitude.rawValue) as! Double, longitude: selected.value(forKey: constantString.attributeLongitude.rawValue) as! Double)
         let marker = GMSMarker(position: coordinate)
 
         marker.appearAnimation = .pop
@@ -171,14 +173,12 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.ibMapView.animate(to: GMSCameraPosition(target: coordinate, zoom: 19, bearing: 0, viewingAngle: 0))
         
-        let imageURL = selected.value(forKey: "imageurl_String") as! String
+        let imageURL = selected.value(forKey: constantString.attributeImageURL.rawValue) as! String
         
-        if imageURL != "IMAGE_NOT_AVAILABLE" {
+        if imageURL != constantString.imageUnavailable.rawValue {
             let imageData = Reminder.retrieveImage(imageURL: imageURL)
             let imageFile = UIImage(data: imageData!)
             
-//            let imageFile = Reminder.retrieveImage(imageURL: imageURL)
-//            let imageFile = retrieveImage(imageURL: imageURL)
             if imageFile != nil {
                 self.ibImagePreview.isHidden = false
                 self.ibImagePreview.makeSquircle()
@@ -216,10 +216,9 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
             let preview = segue.destination as! PreviewViewController
             let selectedItem = self.ds[ibHistoryTable.indexPathForSelectedRow!.section].records[ibHistoryTable.indexPathForSelectedRow!.row]
             
-            let imageURL = selectedItem.value(forKey: "imageurl_String") as! String
+            let imageURL = selectedItem.value(forKey: constantString.attributeImageURL.rawValue) as! String
             let imageData = Reminder.retrieveImage(imageURL: imageURL)
             preview.capturedImage = UIImage(data: imageData!)
-//            preview.capturedImage = retrieveImage(imageURL: imageURL)
             preview.callback_clearCapturedImage = nil
         }
     }
@@ -229,7 +228,9 @@ extension HistoryViewController: UITableViewDataSource, UITableViewDelegate {
 extension HistoryViewController: FoldingHeaderDelegate {
     func clearRecordsInSection(header: FoldingHeader) {
         print("trash  \(header.section) clicked")
-        let alert = UIAlertController(title: "Clear records for \(self.ds[header.section].title)?", message: "This will delete all records in this group.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Clear records for \(self.ds[header.section].title)?",
+            message: "This will delete all records in this group.", preferredStyle: .alert)
+        
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
             if self.ds[header.section].clearRecords() {
                 self.ibHistoryTable.reloadSections(NSIndexSet(index: header.section) as IndexSet, with: .automatic)

@@ -199,20 +199,29 @@ class ViewController: UIViewController {
         for tuple in durationTuples {
             let notificationDate = tempReminder!.dueTime - tuple.duration
             if  notificationDate > tempReminder!.createdTime {
-                let components = Calendar.current.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: notificationDate)
+                let components = Calendar.current.dateComponents([Calendar.Component.day,
+                                                                  Calendar.Component.month,
+                                                                  Calendar.Component.year,
+                                                                  Calendar.Component.hour,
+                                                                  Calendar.Component.minute,
+                                                                  Calendar.Component.second],
+                                                                 from: notificationDate)
                 var notificationTitle = "Parking end in "
                 if tuple.duration > 0 {
                     notificationTitle += tuple.duration.toString()
                 } else {
                     notificationTitle = "Parking has ended"
                 }
-                localNotificationsManager.notifications.append(Notification(id: tuple.id, title: notificationTitle, descrption: tempReminder!.description, datetime: components))
+                localNotificationsManager.notifications.append(Notification(id: tuple.id,
+                                                                            title: notificationTitle,
+                                                                            descrption: tempReminder!.description,
+                                                                            datetime: components))
             }
         }
         localNotificationsManager.schedule()
-        localNotificationsManager.notificationCenter.getPendingNotificationRequests { (notifications) in
+        /**localNotificationsManager.notificationCenter.getPendingNotificationRequests { (notifications) in
             print(notifications.count)
-        }
+        }**/
     }
     
     // this method is used to initialize x this month, y last 3 months and z more months dummy reminder
@@ -269,10 +278,24 @@ class ViewController: UIViewController {
 extension ViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        updateCurrentPos(position.target)
+//        updateCurrentPos(position.target)
+        let coordinate = position.target
+        print("lat: \(coordinate.latitude) ; long: \(coordinate.longitude)")
+        self.tempLatitude = coordinate.latitude
+        self.tempLongitude = coordinate.longitude
+
+        // reverse geocoding
+        let geoCoder = GMSGeocoder()
+        geoCoder.reverseGeocodeCoordinate(coordinate) { response, error in
+            guard let address = response?.firstResult(),
+                let lines = address.lines else {
+                return
+            }
+            self.ibDescriptionText.text = lines.joined(separator: "\n")
+        }
     }
     
-    private func updateCurrentPos(_ coordinate: CLLocationCoordinate2D) {
+    /**private func updateCurrentPos(_ coordinate: CLLocationCoordinate2D) {
         print("lat: \(coordinate.latitude) ; long: \(coordinate.longitude)")
         self.tempLatitude = coordinate.latitude
         self.tempLongitude = coordinate.longitude
@@ -284,7 +307,7 @@ extension ViewController: GMSMapViewDelegate {
             }
             self.ibDescriptionText.text = lines.joined(separator: "\n")
         }
-    }
+    }**/
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -319,7 +342,8 @@ extension ViewController: CLLocationManagerDelegate {
 }
 
 extension ViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let capturedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             picker.dismiss(animated: true, completion: nil)
             // set preview to button

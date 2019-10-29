@@ -37,12 +37,7 @@ class CustomTimerViewController: UIViewController {
             } else {
                 self.callback_createReminder!(self.ibDatePicker.date.timeIntervalSinceNow)
             }
-            /**if self.ibModeSwitch.isOn { // countdown mode
-                self.callback_createReminder!(self.ibDatePicker.countDownDuration)
-            } else {
-                print("(\(#function)) \(self.ibDatePicker.date)")
-                self.callback_createReminder!(self.ibDatePicker.date.timeIntervalSinceNow)
-            }**/
+
         }
 //        dismiss(animated: true, completion: nil)
     }
@@ -57,14 +52,7 @@ class CustomTimerViewController: UIViewController {
             break
         }
     }
-    /**@IBAction func clickModeSwitch(_ sender: UISwitch) {
-        if ibModeSwitch.isOn {
-            initModeTimer()
-        } else {
-            initModeDate()
-        }
-    }**/
-    
+
     func initModeTimer() {
 //        ibModeLabel.text = "Timer"
         ibDatePicker.datePickerMode = .countDownTimer
@@ -84,16 +72,6 @@ class CustomTimerViewController: UIViewController {
         ibDatePicker.minimumDate = Date()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension UIViewController {

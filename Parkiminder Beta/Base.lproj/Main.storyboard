@@ -206,7 +206,7 @@
                                 </cells>
                             </collectionView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_bluecar" translatesAutoresizingMaskIntoConstraints="NO" id="FQD-Pm-gVB">
-                                <rect key="frame" x="167" y="197.5" width="41.000000000000057" height="41.000000000000057"/>
+                                <rect key="frame" x="167" y="197.5" width="41" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="GKD-2a-ySF"/>
                                     <constraint firstAttribute="width" constant="41" id="N6R-kR-a0Q"/>
@@ -216,7 +216,7 @@
                                 <rect key="frame" x="7" y="618" width="61" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
-                                <state key="normal" title="Test">
+                                <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
