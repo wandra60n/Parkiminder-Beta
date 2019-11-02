@@ -54,7 +54,6 @@ class NotifManagerTests: XCTestCase {
         sut.notificationCenter.getPendingNotificationRequests { (notifications) in
             let notifN = notifications.count
             XCTAssertTrue(notifN == self.pendingcount)
-            XCTAssertFalse(notifN == self.pendingcount + 1)
         }
     }
 }
